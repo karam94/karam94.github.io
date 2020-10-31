@@ -1,12 +1,13 @@
 <template>
   <div class="author">
     <g-image
-      alt="Author image"
+      alt="Karam's image"
       class="author__image"
-      src="~/assets/images/author.jpg"
+      src="~/assets/images/karam.webp"
       width="180"
       height="180"
-      blur="5"
+      blur="50"
+      immediate="true"
     />
 
     <h1 v-if="showTitle" class="author__site-title">
