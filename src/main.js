@@ -1,3 +1,5 @@
+import { VueTypedJs } from "vue-typed-js";
+
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { config, library } from "@fortawesome/fontawesome-svg-core";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
@@ -14,6 +16,7 @@ library.add(faHeart);
 
 // The Client API can be used here. Learn more: gridsome.org/docs/client-api
 export default function (Vue, { router, head, isClient }) {
+  Vue.component("VueTypedJs", VueTypedJs);
   Vue.component("FontAwesome", FontAwesomeIcon);
 
   // Set default layout as a global component

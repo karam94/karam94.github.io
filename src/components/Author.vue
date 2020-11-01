@@ -9,6 +9,15 @@
       blur="50"
       immediate="true"
     />
+
+    <vue-typed-js
+      :strings="stringsToType"
+      :type-speed="100"
+      :back-delay="1000"
+      :loop="true"
+    >
+      <h1 class="typing"></h1>
+    </vue-typed-js>
   </div>
 </template>
 
@@ -23,6 +32,15 @@ query {
 <script>
 export default {
   props: ["showTitle"],
+  data() {
+    return {
+      stringsToType: [
+        "Hi, I'm Karam!",
+        "I <span style='color:red;'>♥</span> .NET Core, Vue.js &amp; lots more!",
+        "Welcome to my blog!",
+      ],
+    };
+  },
 };
 </script>
 
