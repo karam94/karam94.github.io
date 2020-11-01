@@ -12,7 +12,7 @@
       />
     </div>
     <div class="post-card__content">
-      <h2 class="post-card__title" v-html="post.title" />
+      <h3 class="post-card__title" v-html="post.title" />
       <PostTags class="post-card__tags" :post="post" />
       <g-link class="post-card__link" :to="post.path">Link</g-link>
     </div>
@@ -38,7 +38,7 @@ export default {
   &__header {
     margin-left: calc(var(--space) * -1);
     margin-right: calc(var(--space) * -1);
-    margin-bottom: calc(var(--space) / 2);
+    margin-bottom: calc(var(--space) * 0.8);
     margin-top: calc(var(--space) * -1);
     overflow: hidden;
     border-radius: var(--radius) var(--radius) 0 0;
@@ -54,11 +54,6 @@ export default {
 
   &__title {
     margin-top: 0;
-  }
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 1px 10px 30px 0 rgba(0, 0, 0, 0.1);
   }
 
   &__tags {

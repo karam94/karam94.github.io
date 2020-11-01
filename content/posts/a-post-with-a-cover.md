@@ -1,5 +1,5 @@
 ---
-title: A post with a cover image
+title: Easily test your Vuex store using Vue Test Utils.
 date: 2019-01-07
 published: true
 tags: ['Markdown', 'Cover Image']
