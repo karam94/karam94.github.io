@@ -48,8 +48,16 @@ export default {
     }
   }
 
+  &:hover .post-card__image {
+    filter: none;
+    -webkit-filter: grayscale(0%);
+    transition: all 0.8s ease;
+  }
+
   &__image {
     min-width: 100%;
+    filter: gray;
+    -webkit-filter: grayscale(100%);
   }
 
   &__title {
