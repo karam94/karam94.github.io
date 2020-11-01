@@ -16,7 +16,11 @@
 
     <footer class="footer">
       <span
-        >Made with <font-awesome :icon="['fas', 'heart']" /> in wet & rainy
+        >Made with
+        <span style="color: red"
+          ><font-awesome :icon="['fas', 'heart']"
+        /></span>
+        in wet & rainy
         <a href="//en.wikipedia.org/wiki/Lancashire" target="_blank"
           >Lancashire</a
         >!</span
