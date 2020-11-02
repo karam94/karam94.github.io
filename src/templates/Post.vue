@@ -8,7 +8,7 @@
       <PostMeta :post="$page.post" />
     </div>
 
-    <div class="post content-box">
+    <div class="post content-box__post">
       <div class="post__header">
         <g-image
           v-if="$page.post.cover_image"
@@ -58,7 +58,7 @@ query Post ($id: ID!) {
   post: post (id: $id) {
     title
     path
-    date (format: "D. MMMM YYYY")
+    date (format: "D MMMM YYYY")
     timeToRead
     tags {
       id

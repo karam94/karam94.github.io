@@ -1,9 +1,20 @@
 // Used to wrap content inside a nice box.
 .content-box {
-	background-color: var(--bg-content-color);
-	max-width: var(--content-width);
-	margin: 0 auto;
-	padding: var(--space);
+  background-color: var(--bg-content-color);
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: var(--space);
   border-radius: var(--radius);
-  box-shadow: 1px 1px 5px 0 rgba(0,0,0,.02), 1px 1px 15px 0 rgba(0,0,0,.03);
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.02),
+    1px 1px 15px 0 rgba(0, 0, 0, 0.03);
+}
+
+.content-box__post {
+  background-color: var(--bg-content-color);
+  max-width: var(--post-content-width);
+  margin: 0 auto;
+  padding: var(--space);
+  border-radius: var(--radius);
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.02),
+    1px 1px 15px 0 rgba(0, 0, 0, 0.03);
 }
