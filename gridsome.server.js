@@ -6,7 +6,10 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 module.exports = function (api) {
-  api.loadSource(({ addCollection }) => {
+  api.loadSource(async (store) => {
     // Use the Data store API here: https://gridsome.org/docs/data-store-api/
+    store.addMetadata("email", "contact@karam.io");
+    store.addMetadata("github", "karam94");
+    store.addMetadata("linkedin", "karamkabbara");
   });
 };

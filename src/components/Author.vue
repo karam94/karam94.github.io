@@ -20,6 +20,8 @@
         <div class="typing"></div>
       </vue-typed-js>
     </div>
+
+    <Social />
   </div>
 </template>
 
@@ -32,7 +34,12 @@ query {
 </static-query>
 
 <script>
+import Social from "./Social";
+
 export default {
+  components: {
+    Social,
+  },
   props: ["showTitle"],
   data() {
     return {
@@ -51,8 +58,8 @@ export default {
   margin: 0 auto;
   max-width: 500px;
   text-align: center;
-  padding: calc(var(--space) / 2) 0;
   margin-bottom: var(--space);
+  border-bottom: 2px solid #eee;
 
   &__image {
     border-radius: 100%;
@@ -81,5 +88,6 @@ export default {
   display: flex;
   justify-content: center;
   font-size: 1.25rem;
+  // margin-bottom: var(--space);
 }
 </style>
