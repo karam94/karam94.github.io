@@ -82,6 +82,8 @@ export default {
   text-align: center;
   font-size: 0.8em;
   padding: calc(var(--space) / 2);
+  border-top: 2px solid #eee;
+
   > span {
     margin: 0 0.35em;
   }
