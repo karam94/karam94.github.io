@@ -10,9 +10,11 @@
       </div>
     </header>
 
-    <main class="main">
-      <slot />
-    </main>
+    <transition name="fade" appear>
+      <main class="main">
+        <slot />
+      </main>
+    </transition>
 
     <footer class="footer">
       <span
@@ -88,5 +90,13 @@ export default {
     color: currentColor;
     text-decoration: none;
   }
+}
+
+.fade-enter-active {
+  transition: opacity 1s;
+}
+
+.fade-enter {
+  opacity: 0;
 }
 </style>
