@@ -10,14 +10,16 @@
       immediate="true"
     />
 
-    <vue-typed-js
-      :strings="stringsToType"
-      :type-speed="100"
-      :back-delay="1000"
-      :loop="true"
-    >
-      <h1 class="typing"></h1>
-    </vue-typed-js>
+    <div class="typing-container">
+      <vue-typed-js
+        :strings="stringsToType"
+        :type-speed="100"
+        :back-delay="1500"
+        :loop="true"
+      >
+        <div class="typing"></div>
+      </vue-typed-js>
+    </div>
   </div>
 </template>
 
@@ -50,6 +52,7 @@ export default {
   max-width: 500px;
   text-align: center;
   padding: calc(var(--space) / 2) 0;
+  margin-bottom: var(--space);
 
   &__image {
     border-radius: 100%;
@@ -72,5 +75,11 @@ export default {
       margin: 0 0.5em;
     }
   }
+}
+
+.typing-container {
+  display: flex;
+  justify-content: center;
+  font-size: 1.25rem;
 }
 </style>
