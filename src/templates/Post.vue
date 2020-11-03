@@ -29,7 +29,7 @@
     </div>
 
     <div class="post-comments">
-      <!-- Add comment widgets here -->
+      <Disqus shortname="karamio" :identifier="$page.post.title" />
     </div>
   </Layout>
 </template>
