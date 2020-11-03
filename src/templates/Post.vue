@@ -24,6 +24,10 @@
       </div>
     </div>
 
+    <div>
+      <BuyMeACoffee />
+    </div>
+
     <div class="post-comments">
       <!-- Add comment widgets here -->
     </div>
@@ -33,11 +37,13 @@
 <script>
 import PostMeta from "~/components/PostMeta";
 import PostTags from "~/components/PostTags";
+import BuyMeACoffee from "~/components/BuyMeACoffee";
 
 export default {
   components: {
     PostMeta,
     PostTags,
+    BuyMeACoffee
   },
   metaInfo() {
     return {
