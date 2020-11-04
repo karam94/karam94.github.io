@@ -87,7 +87,7 @@ export default {
   text-align: center;
   font-size: 0.8em;
   padding: calc(var(--space) / 2);
-  border-top: 2px solid #eee;
+  border-top: 2px solid #e0e0e0;
 
   > span {
     margin: 0 0.35em;
@@ -117,7 +117,7 @@ export default {
     bottom: 3px;
   }
 
-  a:last-child {
+  a:last {
     padding-right: 20px;
   }
 }

@@ -29,6 +29,9 @@ export default {
   components: {
     PageTemplate,
   },
+  metaInfo: {
+    title: "Speaking",
+  },
 };
 </script>
 

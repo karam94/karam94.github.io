@@ -59,7 +59,7 @@ export default {
   max-width: 500px;
   text-align: center;
   margin-bottom: var(--space);
-  border-bottom: 2px solid #eee;
+  border-bottom: 2px solid #e0e0e0;
 
   &__image {
     border-radius: 100%;

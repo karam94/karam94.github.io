@@ -37,6 +37,9 @@ export default {
   components: {
     PageTemplate,
   },
+  metaInfo: {
+    title: "About",
+  },
 };
 </script>
 

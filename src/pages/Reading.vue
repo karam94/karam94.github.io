@@ -28,6 +28,9 @@ export default {
   components: {
     PageTemplate,
   },
+  metaInfo: {
+    title: "Reading",
+  },
 };
 </script>
 
