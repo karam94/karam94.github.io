@@ -1,5 +1,7 @@
 <template>
   <div>
+    <Author :show-title="true" />
+
     <div class="post-title">
       <h1 class="post-title__text">{{ title }}</h1>
     </div>
@@ -13,7 +15,12 @@
 </template>
 
 <script>
+import Author from "./Author";
+
 export default {
+  components: {
+    Author,
+  },
   props: {
     title: {
       type: String,
