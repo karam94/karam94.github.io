@@ -51,7 +51,7 @@ export default {
   &:hover .post-card__image {
     filter: none;
     -webkit-filter: grayscale(0%);
-    transition: all 0.4s ease;
+    transition: all 1s ease;
   }
 
   &__image {
