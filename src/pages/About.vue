@@ -1,11 +1,17 @@
 <template>
   <Layout :show-logo="true">
-    <h1>About</h1>
+    <PageTemplate title="About" content="Hello World" />
   </Layout>
 </template>
 
 <script>
-export default {};
+import PageTemplate from "../components/PageTemplate";
+
+export default {
+  components: {
+    PageTemplate,
+  },
+};
 </script>
 
 <style></style>
