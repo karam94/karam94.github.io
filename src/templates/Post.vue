@@ -29,7 +29,9 @@
     </div>
 
     <div class="post-comments">
-      <Disqus shortname="karamio" :identifier="$page.post.title" />
+      <div class="content-box__comments">
+        <Disqus shortname="karamio" :identifier="$page.post.title" />
+      </div>
     </div>
   </Layout>
 </template>
@@ -43,7 +45,7 @@ export default {
   components: {
     PostMeta,
     PostTags,
-    BuyMeACoffee
+    BuyMeACoffee,
   },
   metaInfo() {
     return {
@@ -123,6 +125,10 @@ query Post ($id: ID!) {
 
 .post-comments {
   padding: calc(var(--space) / 2);
+  max-width: var(--post-content-width);
+  margin: 0 auto;
+  padding: var(--space);
+  border-radius: var(--radius);
 
   &:empty {
     display: none;
