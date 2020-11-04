@@ -6,9 +6,11 @@
       </div>
 
       <div class="header__right">
-        <a href="/about/">About</a>
-        <a href="/reading/">Reading</a>
-        <a href="/speaking/">Speaking</a>
+        <div class="header__right__menu">
+          <a href="/about/">About</a>
+          <a href="/reading/">Reading</a>
+          <a href="/speaking/">Speaking</a>
+        </div>
         <ToggleTheme />
       </div>
     </header>
@@ -103,5 +105,20 @@ export default {
 
 .fade-enter {
   opacity: 0;
+}
+
+.header__right__menu {
+  a {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    color: var(--body-color);
+    text-decoration: none;
+    position: relative;
+    bottom: 3px;
+  }
+
+  a:last-child {
+    padding-right: 20px;
+  }
 }
 </style>
