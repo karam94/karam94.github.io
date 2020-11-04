@@ -6,6 +6,9 @@
       </div>
 
       <div class="header__right">
+        <a href="/about/">About</a>
+        <a href="/reading/">Reading</a>
+        <a href="/speaking/">Speaking</a>
         <ToggleTheme />
       </div>
     </header>
