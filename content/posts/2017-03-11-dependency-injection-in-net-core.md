@@ -20,6 +20,7 @@ Here's a quick example scenario, which should hopefully explain this:
 - A level above that, we also have a `UserController` class, which in an API project for example could contain methods that are mapped to `GET` or `POST` routes which could then allow your Angular, React or Vue front-end to call them or pass data to them to be executed.
 - If a user is attempting to log in via our API, they will first hit a route defined within our `UserController` which would then require the `UserService` to work its magic and talk to a database somewhere via the `UserRepository`, compare password hashes & eventually return whether or not the user has indeed successfully managed to login successfully or not.
 - Given that our `UserService` talks to a separate class which is the `UserRepository`, you'd probably normally do something like this simplified example:
+
 ```csharp
 public class UserService
 {
@@ -36,6 +37,7 @@ public class UserService
     }
 }
 ```
+
 - So let's say we now decide that we want to write some unit tests around our `UserService` but because of the nature of tests, we don't actually want our tests to force the `UserRepository` to talk to or play around with the database in any way shape or form. For logging in, this scenario isn't too bad. But imagine you're testing registering a new user... what do you want to do, create a new user object in the database every time you run your unit tests? This would cause chaos!
 - A suitable solution would be to obviously mock out our `UserRepository`, so that when we Unit Test the `UserService`, we use a mocked out `UserRepository` where we can define what it should return when we pretend to call the `GetUser()` method and allow us to test our `UserService` in isolation. But we don't really want to mock out the `UserRepository` within the `UserService`code because then we're modifying our production code... this is where Dependency Injection becomes your best friend.
 
@@ -92,7 +94,7 @@ Back on topic, normally we tend to use Castle Windsor to handle Dependency Injec
 So, to do this all you have to do is simply navigate to your .NET Core project's `Startup.cs` file and add the following under the `ConfigureServices(IServiceCollection services)` method:
 
 
-{% highlight csharp %}
+```csharp
 public void ConfigureServices(IServiceCollection services)
 {
   services.AddMvc();
@@ -104,7 +106,7 @@ public void ConfigureServices(IServiceCollection services)
   services.AddSingleton<ICatRepository, CatRepository>();
   services.AddInstance<IRabbitRepository>(_rabbitRepository);
 }
-{% endhighlight %}
+```
 
 The `AddTransient()` method creates a brand new instance of the `UserRepository()` each and every single time it is requested, even if requested within the same scope, these are great for stateless APIs. This means every time any kind of Service within a project uses a `UserRepository`, it will have a brand new Repository injected to use.
 
