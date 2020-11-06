@@ -4,8 +4,8 @@ date: 2019-05-25
 published: true
 tags: [".NET Core"]
 series: false
-cover_image: ./images/emin-baycan-LV1CxYBgXqU-unsplash.jpg
-cover_image_credits: Emin BAYCAN https://unsplash.com/@aimlesscode?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image: ./images/campaign-creators-IKHvOlZFCOg-unsplash.jpg
+cover_image_credits: Campaign Creators https://unsplash.com/@campaign_creators?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 canonical_url: false
 description: "After an hour of tearing my hair out..."
 ---

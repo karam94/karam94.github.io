@@ -4,8 +4,8 @@ date: 2019-04-28
 published: true
 tags: ["Miscellaneous"]
 series: false
-cover_image: ./images/emin-baycan-LV1CxYBgXqU-unsplash.jpg
-cover_image_credits: Emin BAYCAN https://unsplash.com/@aimlesscode?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image: ./images/kristina-flour-BcjdbyKWquw-unsplash.jpg
+cover_image_credits: Kristina Flour https://unsplash.com/@tinaflour?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 canonical_url: false
 description: "When you forget to add a .gitignore to your project..."
 ---

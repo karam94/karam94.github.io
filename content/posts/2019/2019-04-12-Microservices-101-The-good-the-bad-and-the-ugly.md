@@ -4,8 +4,8 @@ date: 2019-04-12
 published: true
 tags: ["Software Architecture"]
 series: false
-cover_image: ./images/emin-baycan-LV1CxYBgXqU-unsplash.jpg
-cover_image_credits: Emin BAYCAN https://unsplash.com/@aimlesscode?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image: ./images/sara-scarpa-wKmkzbrLpMM-unsplash.jpg
+cover_image_credits: Sara Scarpa https://unsplash.com/@sarinaseyes?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 canonical_url: false
 description: "I attended the latest Designing Microservices workshop at NDC London 2019..."
 ---

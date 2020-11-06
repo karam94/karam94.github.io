@@ -4,8 +4,8 @@ date: 2019-03-14
 published: true
 tags: ["Miscellaneous"]
 series: false
-cover_image: ./images/emin-baycan-LV1CxYBgXqU-unsplash.jpg
-cover_image_credits: Emin BAYCAN https://unsplash.com/@aimlesscode?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image: ./images/k8-0_fkPHulv-M-unsplash.jpg
+cover_image_credits: K8 https://unsplash.com/@k8_iv?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 canonical_url: false
 description: "Does this title incite you? Well, I have the solution on Tuesday March 19th!"
 ---

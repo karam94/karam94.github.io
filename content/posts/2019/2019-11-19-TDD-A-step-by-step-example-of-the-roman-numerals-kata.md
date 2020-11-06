@@ -4,8 +4,8 @@ date: 2019-11-23
 published: true
 tags: ["TDD"]
 series: false
-cover_image: ./images/emin-baycan-LV1CxYBgXqU-unsplash.jpg
-cover_image_credits: Emin BAYCAN https://unsplash.com/@aimlesscode?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image: ./images/concha-mayo-cAkcO3Vk3_E-unsplash.jpg
+cover_image_credits: Concha Mayo https://unsplash.com/@conchamayo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 canonical_url: false
 description: "Understanding TDD is one thing, but putting it into practice is another!"
 ---

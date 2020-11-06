@@ -4,8 +4,8 @@ date: 2019-06-23
 published: true
 tags: ["Vue.js"]
 series: false
-cover_image: ./images/emin-baycan-LV1CxYBgXqU-unsplash.jpg
-cover_image_credits: Emin BAYCAN https://unsplash.com/@aimlesscode?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image: ./images/john-cameron-YDRvmSQypE0-unsplash.jpg
+cover_image_credits: John Cameron https://unsplash.com/@john_cameron?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 canonical_url: false
 description: "The Vue community are rising up in revolt..."
 ---

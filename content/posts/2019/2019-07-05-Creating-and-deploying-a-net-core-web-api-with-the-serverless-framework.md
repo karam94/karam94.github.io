@@ -4,8 +4,8 @@ date: 2019-07-05
 published: true
 tags: ["AWS", ".NET Core"]
 series: false
-cover_image: ./images/emin-baycan-LV1CxYBgXqU-unsplash.jpg
-cover_image_credits: Emin BAYCAN https://unsplash.com/@aimlesscode?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image: ./images/taylor-vick-M5tzZtFCOfs-unsplash.jpg
+cover_image_credits: Taylor Vick https://unsplash.com/@tvick?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 canonical_url: false
 description: "Lambda functions are nice... but sometimes you just want a whole API!"
 ---

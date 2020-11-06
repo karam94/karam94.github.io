@@ -4,8 +4,8 @@ date: 2019-01-04
 published: true
 tags: [".NET Core"]
 series: false
-cover_image: ./images/emin-baycan-LV1CxYBgXqU-unsplash.jpg
-cover_image_credits: Emin BAYCAN https://unsplash.com/@aimlesscode?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image: ./images/anton-SnKfmC1I9fU-unsplash.jpg
+cover_image_credits: Anton https://unsplash.com/@uniqueton?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 canonical_url: false
 description: "Love clean looking code? Love C# & .NET? This might help!"
 ---

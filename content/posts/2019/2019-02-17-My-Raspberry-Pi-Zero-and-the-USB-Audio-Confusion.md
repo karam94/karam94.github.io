@@ -4,8 +4,8 @@ date: 2019-02-17
 published: true
 tags: ["Miscellaneous"]
 series: false
-cover_image: ./images/emin-baycan-LV1CxYBgXqU-unsplash.jpg
-cover_image_credits: Emin BAYCAN https://unsplash.com/@aimlesscode?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image: ./images/harrison-broadbent-hSHNPyND_dU-unsplash.jpg
+cover_image_credits: Harrison Broadbent https://unsplash.com/@harrisonbroadbent?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 canonical_url: false
 description: "So... I won a free Raspberry Pi Zero from Google! Then I bought some USB speakers for it and chaos ensued!"
 ---
