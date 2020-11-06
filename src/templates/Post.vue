@@ -15,6 +15,9 @@
           alt="Cover image"
           :src="$page.post.cover_image"
         />
+        <div class="post__header-credits">
+          Image credits: {{ $page.post.cover_image_credits }}
+        </div>
       </div>
 
       <div class="post__content" v-html="$page.post.content" />
@@ -76,6 +79,7 @@ query Post ($id: ID!) {
     description
     content
     cover_image (width: 860, blur: 10)
+    cover_image_credits
   }
 }
 </page-query>
@@ -102,6 +106,11 @@ query Post ($id: ID!) {
     &:empty {
       display: none;
     }
+  }
+
+  &__header-credits {
+    text-align: center;
+    font-size: 0.5rem;
   }
 
   &__content {

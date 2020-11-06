@@ -4,8 +4,8 @@ date: 2020-05-18
 published: true
 tags: ["Miscellaneous"]
 series: false
-cover_image: ./images/emin-baycan-LV1CxYBgXqU-unsplash.jpg
-cover_image_credits: Emin BAYCAN https://unsplash.com/@aimlesscode?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image: ./images/wes-hicks-4-EeTnaC1S4-unsplash.jpg
+cover_image_credits: Wes Hicks https://unsplash.com/@sickhews?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 canonical_url: false
 description: "Need to quickly learn a new code base or upskill in some technologies? Here are my tips."
 ---

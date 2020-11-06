@@ -4,8 +4,8 @@ date: 2020-08-01
 published: true
 tags: ["Vue.js", "Testing"]
 series: false
-cover_image: ../images/emin-baycan-LV1CxYBgXqU-unsplash.jpg
-cover_image_credits: Emin BAYCAN https://unsplash.com/@aimlesscode?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image: ./images/national-cancer-institute-DYQfoftWGXw-unsplash.jpg
+cover_image_credits: "National Cancer Institute https://unsplash.com/@nci?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
 canonical_url: false
 description: "Tired of brittle tests by testing your Vuex actions, mutations and getters all separately? Vue Test Utils has the solution!"
 ---
