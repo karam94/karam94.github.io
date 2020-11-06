@@ -4,8 +4,8 @@ date: 2018-11-25
 published: true
 tags: ["Go"]
 series: false
-cover_image: ./images/emin-baycan-LV1CxYBgXqU-unsplash.jpg
-cover_image_credits: Emin BAYCAN https://unsplash.com/@aimlesscode?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image: ./images/jude-infantini-rYOqbTcGp1c-unsplash.jpg
+cover_image_credits: Jude Infantini https://unsplash.com/@easy_emu?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 canonical_url: false
 description: "Our monthly challenge for November 2018 is complete..."
 ---

@@ -4,8 +4,8 @@ date: 2018-05-10
 published: true
 tags: ["Miscellaneous"]
 series: false
-cover_image: ./images/emin-baycan-LV1CxYBgXqU-unsplash.jpg
-cover_image_credits: Emin BAYCAN https://unsplash.com/@aimlesscode?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image: ./images/lewis-ngugi-f5pTwLHCsAg-unsplash.jpg
+cover_image_credits: Lewis Ngugi https://unsplash.com/@ngeshlew?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 canonical_url: false
 description: "Like ConEmu on Windows? Get the same on Mac OS!"
 ---

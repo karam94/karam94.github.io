@@ -4,8 +4,8 @@ date: 2018-11-06
 published: true
 tags: ["Miscellaneous"]
 series: false
-cover_image: ./images/emin-baycan-LV1CxYBgXqU-unsplash.jpg
-cover_image_credits: Emin BAYCAN https://unsplash.com/@aimlesscode?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image: ./images/max-kleinen-ugdKmhDg1m8-unsplash.jpg
+cover_image_credits: Max Kleinen https://unsplash.com/@hirmin?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 canonical_url: false
 description: "A plead to those who fear failure."
 ---

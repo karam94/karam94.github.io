@@ -1,11 +1,13 @@
 ---
-title:  "I love Vue & you should try it too!"
-date:   2018-05-01 21:38:00
-description: Why can't we be friends?
+title: I love Vue & you should try it too!
+date: 2018-05-01
 published: true
-image: "https://raw.githubusercontent.com/karam94/karam94.github.io/master/assets/images/lovevuejs.png"
-excerpt: "Those of you who know me, know that I love Vue.js. Oh and before you ask, yes I have experience with other front-end frameworks. And yes, my exposure and usage of these other front-end frameworks did infact come before my exposure to Vue, so by no means did I approach other frameworks with a pre-conceived or biased mindset."
-categories: [Vue.js]
+tags: ["Vue.js"]
+series: false
+cover_image: ./images/caspar-camille-rubin-0qvBNep1Y04-unsplash.jpg
+cover_image_credits: Caspar Camille Rubin https://unsplash.com/@casparrubin?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+canonical_url: false
+description: "Those of you who know me, know that I love Vue.js. Oh and before you ask, yes I have experience with other front-end frameworks. And yes, my exposure and usage of these other front-end frameworks did infact come before my exposure to Vue, so by no means did I approach other frameworks with a pre-conceived or biased mindset."
 ---
 <figure>
     <img src="https://raw.githubusercontent.com/karam94/karam94.github.io/master/assets/images/lovevuejs.png"/>

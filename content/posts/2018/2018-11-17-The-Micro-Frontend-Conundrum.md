@@ -4,8 +4,8 @@ date: 2018-11-17
 published: true
 tags: ["Software Architecture"]
 series: false
-cover_image: ./images/emin-baycan-LV1CxYBgXqU-unsplash.jpg
-cover_image_credits: Emin BAYCAN https://unsplash.com/@aimlesscode?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image: ./images/job-savelsberg-TY1_ppdFUKc-unsplash.jpg
+cover_image_credits: Job Savelsberg https://unsplash.com/@jobsavelsberg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 canonical_url: false
 description: "When your frontend becomes a monolith..."
 ---
