@@ -5,7 +5,7 @@ published: true
 tags: [".NET Core"]
 series: false
 cover_image: ./images/anton-SnKfmC1I9fU-unsplash.jpg
-cover_image_credits: Anton https://unsplash.com/@uniqueton?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image_credits: "<a href='https://unsplash.com/@uniqueton'>Anton</a>"
 canonical_url: false
 description: "Love clean looking code? Love C# & .NET? This might help!"
 ---

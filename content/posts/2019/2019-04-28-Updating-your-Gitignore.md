@@ -5,7 +5,7 @@ published: true
 tags: ["Miscellaneous"]
 series: false
 cover_image: ./images/kristina-flour-BcjdbyKWquw-unsplash.jpg
-cover_image_credits: Kristina Flour https://unsplash.com/@tinaflour?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image_credits: "<a href='https://unsplash.com/@tinaflour'>Kristina Flour</a>"
 canonical_url: false
 description: "When you forget to add a .gitignore to your project..."
 ---

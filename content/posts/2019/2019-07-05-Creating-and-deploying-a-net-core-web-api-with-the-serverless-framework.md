@@ -5,7 +5,7 @@ published: true
 tags: ["AWS", ".NET Core"]
 series: false
 cover_image: ./images/taylor-vick-M5tzZtFCOfs-unsplash.jpg
-cover_image_credits: Taylor Vick https://unsplash.com/@tvick?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image_credits: "<a href='https://unsplash.com/@tvick'>Taylor Vick</a>"
 canonical_url: false
 description: "Lambda functions are nice... but sometimes you just want a whole API!"
 ---

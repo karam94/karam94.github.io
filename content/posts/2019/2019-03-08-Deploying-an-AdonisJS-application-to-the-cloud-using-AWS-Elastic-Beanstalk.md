@@ -5,7 +5,7 @@ published: true
 tags: ["AdonisJs", "Node.js", "AWS"]
 series: false
 cover_image: ./images/c-dustin-K-Iog-Bqf8E-unsplash.jpg
-cover_image_credits: C Dustin https://unsplash.com/@dianamia?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image_credits: "<a href='https://unsplash.com/@dianamia'>C Dustin</a>"
 canonical_url: false
 description: "From your hard drive to the AWS cloud in seconds!"
 ---

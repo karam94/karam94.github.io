@@ -5,7 +5,7 @@ published: true
 tags: ["Miscellaneous"]
 series: false
 cover_image: ./images/harrison-broadbent-hSHNPyND_dU-unsplash.jpg
-cover_image_credits: Harrison Broadbent https://unsplash.com/@harrisonbroadbent?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image_credits: "<a href='https://unsplash.com/@harrisonbroadbent'>Harrison Broadbent</a>"
 canonical_url: false
 description: "So... I won a free Raspberry Pi Zero from Google! Then I bought some USB speakers for it and chaos ensued!"
 ---

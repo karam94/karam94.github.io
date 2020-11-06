@@ -5,7 +5,7 @@ published: true
 tags: ["Software Architecture"]
 series: false
 cover_image: ./images/sara-scarpa-wKmkzbrLpMM-unsplash.jpg
-cover_image_credits: Sara Scarpa https://unsplash.com/@sarinaseyes?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image_credits: "<a href='https://unsplash.com/@sarinaseyes'>Sara Scarpa</a>"
 canonical_url: false
 description: "I attended the latest Designing Microservices workshop at NDC London 2019..."
 ---

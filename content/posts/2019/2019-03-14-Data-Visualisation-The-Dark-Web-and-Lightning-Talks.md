@@ -5,7 +5,7 @@ published: true
 tags: ["Miscellaneous"]
 series: false
 cover_image: ./images/k8-0_fkPHulv-M-unsplash.jpg
-cover_image_credits: K8 https://unsplash.com/@k8_iv?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image_credits: "<a href='https://unsplash.com/@k8_iv'>K8</a>"
 canonical_url: false
 description: "Does this title incite you? Well, I have the solution on Tuesday March 19th!"
 ---

@@ -5,7 +5,7 @@ published: true
 tags: ["TDD"]
 series: false
 cover_image: ./images/concha-mayo-cAkcO3Vk3_E-unsplash.jpg
-cover_image_credits: Concha Mayo https://unsplash.com/@conchamayo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image_credits: "<a href='https://unsplash.com/@conchamayo'>Concha Mayo</a>"
 canonical_url: false
 description: "Understanding TDD is one thing, but putting it into practice is another!"
 ---

@@ -5,7 +5,7 @@ published: true
 tags: ["Vue.js"]
 series: false
 cover_image: ./images/john-cameron-YDRvmSQypE0-unsplash.jpg
-cover_image_credits: John Cameron https://unsplash.com/@john_cameron?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image_credits: "<a href='https://unsplash.com/@john_cameron'>John Cameron</a>"
 canonical_url: false
 description: "The Vue community are rising up in revolt..."
 ---

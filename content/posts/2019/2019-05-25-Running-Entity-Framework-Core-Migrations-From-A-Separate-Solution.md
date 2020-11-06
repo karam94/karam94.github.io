@@ -5,7 +5,7 @@ published: true
 tags: [".NET Core"]
 series: false
 cover_image: ./images/campaign-creators-IKHvOlZFCOg-unsplash.jpg
-cover_image_credits: Campaign Creators https://unsplash.com/@campaign_creators?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image_credits: "<a href='https://unsplash.com/@campaign_creators'>Campaign Creators</a>"
 canonical_url: false
 description: "After an hour of tearing my hair out..."
 ---
