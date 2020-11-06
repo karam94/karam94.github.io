@@ -10,7 +10,7 @@ module.exports = {
     "I like writing code & playing football. I'm terrible at both.",
 
   templates: {
-    Post: "/:year/:title",
+    Post: "/blog/:year/:title",
     Tag: "/blog/tag/:id",
   },
 
