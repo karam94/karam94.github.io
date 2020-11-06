@@ -5,7 +5,7 @@ published: true
 tags: [".NET Core"]
 series: false
 cover_image: ./images/emin-baycan-LV1CxYBgXqU-unsplash.jpg
-cover_image_credits: Emin BAYCAN https://unsplash.com/@aimlesscode?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image_credits: "<a href='https://unsplash.com/@aimlesscode'>Emin BAYCAN</a>"
 canonical_url: false
 description: "I think it's safe to say that there's a lot of hype around .NET Core nowadays because of it being cross-platform, open source, etc, which isn't really something we've been used to from Microsoft technologies over the years. So as someone who works in a predominantly .NET dominated environment, I wanted to dedicate some time playing around with it, building a simple API & just investigating how different it is to the regular .NET Framework."
 ---
