@@ -5,7 +5,7 @@ published: true
 tags: ["Vue.js", "Testing"]
 series: false
 cover_image: ./images/national-cancer-institute-DYQfoftWGXw-unsplash.jpg
-cover_image_credits: "National Cancer Institute https://unsplash.com/@nci?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+cover_image_credits: "<a href='https://unsplash.com/@nci'>National Cancer Institute</a>"
 canonical_url: false
 description: "Tired of brittle tests by testing your Vuex actions, mutations and getters all separately? Vue Test Utils has the solution!"
 ---

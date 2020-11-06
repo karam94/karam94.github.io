@@ -5,7 +5,7 @@ published: true
 tags: ["Miscellaneous"]
 series: false
 cover_image: ./images/wes-hicks-4-EeTnaC1S4-unsplash.jpg
-cover_image_credits: Wes Hicks https://unsplash.com/@sickhews?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image_credits: "<a href='https://unsplash.com/@sickhews'>Wes Hicks</a>"
 canonical_url: false
 description: "Need to quickly learn a new code base or upskill in some technologies? Here are my tips."
 ---

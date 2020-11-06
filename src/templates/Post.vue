@@ -16,7 +16,7 @@
           :src="$page.post.cover_image"
         />
         <div class="post__header-credits">
-          Image credits: {{ $page.post.cover_image_credits }}
+          Image credits: <span v-html="$page.post.cover_image_credits" />
         </div>
       </div>
 
@@ -111,6 +111,11 @@ query Post ($id: ID!) {
   &__header-credits {
     text-align: center;
     font-size: 0.5rem;
+
+    a {
+      text-decoration: none;
+      color: var(--base-color);
+    }
   }
 
   &__content {

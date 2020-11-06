@@ -5,7 +5,7 @@ published: true
 tags: ["Miscellaneous"]
 series: false
 cover_image: ./images/chaozzy-lin-SlHFrXTlCc8-unsplash.jpg
-cover_image_credits: Chaozzy Lin https://unsplash.com/@chaozzy?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image_credits: "<a href='https://unsplash.com/@chaozzy'>Chaozzy Lin</a>"
 canonical_url: false
 description: "Fear of missing out & imposter syndrome are two serious problems that many software developers have to deal with. Trust me, you're not alone... & trust me, you're also fantastic at what you do, regardless what you might think."
 ---
