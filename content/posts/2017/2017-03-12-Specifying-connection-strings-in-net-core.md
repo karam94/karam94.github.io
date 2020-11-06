@@ -4,8 +4,8 @@ date: 2017-03-12
 published: true
 tags: [".NET Core"]
 series: false
-cover_image: ./images/emin-baycan-LV1CxYBgXqU-unsplash.jpg
-cover_image_credits: Emin BAYCAN https://unsplash.com/@aimlesscode?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image: ./images/daniel-fazio-m9LlUwkPvT8-unsplash.jpg
+cover_image_credits: Daniel Fazio https://unsplash.com/@danielfazio?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 canonical_url: false
 description: "When you waste an entire hour trying to define a connection string..."
 ---
