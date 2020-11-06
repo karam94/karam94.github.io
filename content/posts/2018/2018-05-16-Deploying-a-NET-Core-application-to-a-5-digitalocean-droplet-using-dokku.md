@@ -5,7 +5,7 @@ published: true
 tags: [".NET Core", "DigitalOcean"]
 series: false
 cover_image: ./images/neonbrand-4N3iHYmqy_E-unsplash.jpg
-cover_image_credits: NeONBRAND https://unsplash.com/@neonbrand?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image_credits: "<a href='https://unsplash.com/@neonbrand'>NeONBRAND</a>"
 canonical_url: false
 description: "Oceans, docks, whales & five dollars."
 ---

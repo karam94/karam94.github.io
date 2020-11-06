@@ -5,7 +5,7 @@ published: true
 tags: ["Vue.js"]
 series: false
 cover_image: ./images/caspar-camille-rubin-0qvBNep1Y04-unsplash.jpg
-cover_image_credits: Caspar Camille Rubin https://unsplash.com/@casparrubin?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image_credits: "<a href='https://unsplash.com/@casparrubin'>Caspar Camille Rubin</a>"
 canonical_url: false
 description: "Those of you who know me, know that I love Vue.js. Oh and before you ask, yes I have experience with other front-end frameworks. And yes, my exposure and usage of these other front-end frameworks did infact come before my exposure to Vue, so by no means did I approach other frameworks with a pre-conceived or biased mindset."
 ---

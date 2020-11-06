@@ -5,7 +5,7 @@ published: true
 tags: ["Go"]
 series: false
 cover_image: ./images/jude-infantini-rYOqbTcGp1c-unsplash.jpg
-cover_image_credits: Jude Infantini https://unsplash.com/@easy_emu?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image_credits: "<a href='https://unsplash.com/@easy_emu'>Jude Infantini</a>"
 canonical_url: false
 description: "Our monthly challenge for November 2018 is complete..."
 ---

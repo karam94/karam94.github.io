@@ -5,7 +5,7 @@ published: true
 tags: ["Miscellaneous"]
 series: false
 cover_image: ./images/pankaj-patel-u2Ru4QBXA5Q-unsplash.jpg
-cover_image_credits: Pankaj Patel https://unsplash.com/@pankajpatel?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image_credits: "<a href='https://unsplash.com/@pankajpatel'>Pankaj Patel</a>"
 canonical_url: false
 description: "A simple solution, to an annoying problem."
 ---

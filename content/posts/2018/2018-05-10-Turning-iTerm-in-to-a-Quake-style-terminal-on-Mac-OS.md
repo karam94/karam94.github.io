@@ -5,7 +5,7 @@ published: true
 tags: ["Miscellaneous"]
 series: false
 cover_image: ./images/lewis-ngugi-f5pTwLHCsAg-unsplash.jpg
-cover_image_credits: Lewis Ngugi https://unsplash.com/@ngeshlew?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image_credits: "<a href='https://unsplash.com/@ngeshlew'>Lewis Ngugi</a>"
 canonical_url: false
 description: "Like ConEmu on Windows? Get the same on Mac OS!"
 ---

@@ -5,7 +5,7 @@ published: true
 tags: ["Miscellaneous"]
 series: false
 cover_image: ./images/lala-azizli-tfNyTfJpKvc-unsplash.jpg
-cover_image_credits: Lala Azizli https://unsplash.com/@lazizli?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image_credits: "<a href='https://unsplash.com/@lazizlid'>Lala Azizli</a>"
 canonical_url: false
 description: "Coffee, ribs, steak and then more coffee..."
 ---

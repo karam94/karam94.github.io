@@ -5,7 +5,7 @@ published: true
 tags: ["Miscellaneous"]
 series: false
 cover_image: ./images/pankaj-patel-Fi-GJaLRGKc-unsplash.jpg
-cover_image_credits: Pankaj Patel https://unsplash.com/@pankajpatel?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image_credits: "<a href='https://unsplash.com/@pankajpatel'>Pankaj Patel</a>"
 canonical_url: false
 description: "Used to ReSharper bindings like me? Get 'em in VS Code!."
 ---

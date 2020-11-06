@@ -5,7 +5,7 @@ published: true
 tags: ["AdonisJs"]
 series: false
 cover_image: ./images/nghia-le-V3DokM1NQcs-unsplash.jpg
-cover_image_credits: Nghia Le https://unsplash.com/@lephunghia?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image_credits: "<a href='https://unsplash.com/@lephunghia'>Nghia Le</a>"
 canonical_url: false
 description: "Discussing our challenge for December 2018..."
 ---

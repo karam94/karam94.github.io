@@ -5,7 +5,7 @@ published: true
 tags: ["Software Architecture"]
 series: false
 cover_image: ./images/job-savelsberg-TY1_ppdFUKc-unsplash.jpg
-cover_image_credits: Job Savelsberg https://unsplash.com/@jobsavelsberg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+cover_image_credits: "<a href='https://unsplash.com/@jobsavelsberg'>Job Savelsberg</a>"
 canonical_url: false
 description: "When your frontend becomes a monolith..."
 ---
