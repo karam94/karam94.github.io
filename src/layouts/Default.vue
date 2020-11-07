@@ -120,5 +120,12 @@ export default {
   a:last {
     padding-right: 20px;
   }
+
+  @media screen and (max-width: 400px) {
+    a {
+      padding: 8px 8px;
+      font-size: 0.8rem;
+    }
+  }
 }
 </style>
