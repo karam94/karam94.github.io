@@ -8,6 +8,7 @@ module.exports = {
   siteName: "Karam.io",
   siteDescription:
     "I like writing code & playing football. I'm terrible at both.",
+  siteUrl: "http://karam.io",
 
   templates: {
     Post: "/blog/:year/:title",
