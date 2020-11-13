@@ -50,7 +50,7 @@ For the moment though, let's focus on how to deploy your .NET Core applications 
 5. Now that we are done, go back to Session on the category section on the left hand side, give your current settings a name under Saved Sessions and click Save. Now, when you launch PuTTY again in the future, you have the option to load the settings rather than have to input and configure everything again.
 6. We are now ready to remotely access our Droplet. You can do this by clicking Open. When asked who you are logging in as, use the username 'root' without the single quotes.
 
-<img src="https://raw.githubusercontent.com/karam94/karam94.github.io/master/assets/images/dokku-setup-3.png"/>
+![PuTTY Configuration for the Digital Ocean Droplet](./images/dokku-setup-3.png)
 
 ## Accessing our DigitalOcean Droplet (using SSH on Mac OS)
 1. In order to remote on to our Droplet, you will need to use the built-in SSH client on Mac OSX that can be found in your Utilities folder.
@@ -67,7 +67,7 @@ sudo DOKKU_TAG=v0.12.4 bash bootstrap.sh
 
 &nbsp;3. Once your installation is successful, you need to configure Dokku. Open your browser and navigate to your Droplet IP. This will launch your Dokku web installer. What you do here will depend slightly on whether or not you opted to go with the SSH key approach, but it should be self explanatory. Unless you have deviated from this tutorial and tried to set up your droplet to use your own domain name [(Note: You can learn how to do this from the Dokku documentation)](http://dokku.viewdocs.io), you should be fine to leave everything the way it is and click "Finish Setup".
 
-<img src="https://raw.githubusercontent.com/karam94/karam94.github.io/master/assets/images/dokku-setup.png"/>
+![Dokku Setup](./images/dokku-setup.png)
 
 ## Deploying our ASP .NET Core application to our Droplet
 1. It is crucial that our projects utilise a [Dockerfile](https://docs.docker.com/engine/reference/builder/#usage) as this will immediately tell Dokku how to deploy our application. Dokku automatically realises when we commit to it a Dockerfile and has the ability to run it within a Docker container on our server for us to access. 
@@ -144,9 +144,8 @@ Step 5/13 : RUN dotnet restore
 
 &nbsp;8. That's it! You've successfully deployed a fully functional .NET Core application to a $5 DigitalOcean Droplet in minutes thanks to Dokku & its magic handling of a dockerfile! If you're already thinking ahead towards how you'd go about hosting a database and linking everything up, there's plenty of information that can be found in the [Dokku documentation](http://dokku.viewdocs.io/dokku/).
 
-<img src="https://raw.githubusercontent.com/karam94/karam94.github.io/master/assets/images/dokku-setup-2.png"/>
-
+![The final .NET Core application](./images/dokku-setup-2.png)
 
 ### Edit: Special shout out to [/r/dotnet](http://reddit.com/r/dotnet) for upvoting this article to sit top of the sub-reddit for a day!
 
-<img src="https://raw.githubusercontent.com/karam94/karam94.github.io/master/assets/images/redditdokkupost.png"/>
+![Thank you Reddit!](./images/redditdokkupost.png)

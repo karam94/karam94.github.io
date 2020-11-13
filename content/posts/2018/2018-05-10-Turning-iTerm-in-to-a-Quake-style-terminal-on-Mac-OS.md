@@ -9,11 +9,6 @@ cover_image_credits: "<a href='https://unsplash.com/@ngeshlew'>Lewis Ngugi</a>"
 canonical_url: false
 description: "Like ConEmu on Windows? Get the same on Mac OS!"
 ---
-<figure>
-    <img src="https://raw.githubusercontent.com/karam94/karam94.github.io/master/assets/images/terminalpost.png"/>
-    <figcaption>Image Source: https://superuser.com/questions/118490/a-top-down-terminal</figcaption>
-</figure>
-
 At work, I have a beautiful state of the art Lenovo Thinkpad. An incredibly powerful machine... or "beast" I perhaps should proclaim it to be. Particularly given the fact that it weighs about 20 kilograms! But then again, what else would you expect given how much processing power Visual Studio & ReSharper need nowadays...
 
 *(Okay, maybe I'm overexaggerating...)*
