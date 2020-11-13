@@ -22,8 +22,10 @@ After some investigation, it became clear that the non-conflicted copies were in
 
 So, I thought it was about time I came up with an automated solution of some sort to solve this issue. A bash script was the obvious solution that I can run every month or so to clean out the files. Not an ideal solution, but it gets the job done, right?
 
-    cd /YourDropboxLocation/Dropbox/
-    find . | grep "conflicted copy" | while read i; do echo $i; \rm "$i"; done
+```bash
+cd /YourDropboxLocation/Dropbox/
+find . | grep "conflicted copy" | while read i; do echo $i; \rm "$i"; done
+```
 
 The script is pretty straight forward. It simply runs in the root Dropbox directory, looks for all files which match the text "conflicted copy" using the grep command, pipes the files to a loop which iterates through all the found files and removes each and every single one.
 

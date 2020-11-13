@@ -9,6 +9,8 @@ cover_image_credits: "<a href='https://unsplash.com/@danielfazio'>Daniel Fazio</
 canonical_url: false
 description: "When you waste an entire hour trying to define a connection string..."
 ---
+# OUT OF DATE - This post is from 2017. Please see this link for a much better way to do this: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-5.0
+
 It's true. I wasted an entire hour trying to get my head around how on earth we can define connection strings in .NET Core.
 
 Traditionally in older .NET Frameworks, you just used to place something along these lines under `web.config`, somewhere in the root of your solution.
