@@ -9,12 +9,8 @@ cover_image_credits: "<a href='https://unsplash.com/@pankajpatel'>Pankaj Patel</
 canonical_url: false
 description: "A simple solution, to an annoying problem."
 ---
-<figure>
-    <img src="https://github.com/duyluonglc/vscode-edge/raw/master/images/screenshot.png" style="display: block; margin-left: auto; margin-right: auto;"/>
-    <figcaption>Image Source: https://marketplace.visualstudio.com/items?itemName=luongnd.edge</figcaption>
-</figure>
 
-If you've been following my blog recently, you'll be aware that I've been playing around a lot with [AdonisJS](https://adonisjs.com/) at home and as it is a Node.js web framework, instead of just plain HTML in views, it actually uses its own templating engine instead called [Edge](https://edge.adonisjs.com/).
+If you read my last blog post, you'll be aware that I've been playing around a lot with [AdonisJS](https://adonisjs.com/) at home and as it is a Node.js web framework, instead of just plain HTML in views, it actually uses its own templating engine instead called [Edge](https://edge.adonisjs.com/).
 
 This is just a quick post that addresses a small issue in Visual Studio Code that I've faced a lot in the past when dealing with different frameworks and different templating languages such as [Nunjucks](https://mozilla.github.io/nunjucks/) that are all really just HTML based files.
 

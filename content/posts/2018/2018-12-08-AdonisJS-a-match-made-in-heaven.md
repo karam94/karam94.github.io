@@ -9,10 +9,8 @@ cover_image_credits: "<a href='https://unsplash.com/@lephunghia'>Nghia Le</a>"
 canonical_url: false
 description: "Discussing our challenge for December 2018..."
 ---
-<figure>
-    <img src="https://cdn-images-1.medium.com/max/1600/1*h13YbzArlrQwRSGi2CM9cA.png" style="display: block; margin-left: auto; margin-right: auto;"/>
-    <figcaption>Image Source: https://adonisjs.com/</figcaption>
-</figure>
+
+![The AdonisJS homepage](https://cdn-images-1.medium.com/max/1600/1*h13YbzArlrQwRSGi2CM9cA.png)
 
 Adonis is a name that will probably ring some bells. To cut a long story short, to most it will remind them of the god of beauty and desire, as popularly known in Greek mythology. However a fact that many do not know is that Adonis was actually originally a god worshipped in Phoenicia that then later got adopted by the Greeks.
 
@@ -20,10 +18,7 @@ Now the trick here is that Phoenicia is actually what we refer to as, modern day
 
 The real question at hand though is whether or not this means that myself and Adonis could end up being a match made in heaven... the Node.js framework of course, not the god (admit it, my pun using the word heaven was pretty decent there).
 
-<figure>
-    <img src="https://media.giphy.com/media/wWue0rCDOphOE/giphy.gif" style="display: block; margin-left: auto; margin-right: auto;"/>
-    <figcaption>I apologise for my dreadful sense of humour.</figcaption>
-</figure>
+![Mike Tyson laughing](https://media.giphy.com/media/wWue0rCDOphOE/giphy.gif)
 
 Regardless, I see it as a sign to use this month to brush up on a Node.js web framework I played around with just over a year ago - [AdonisJS](https://adonisjs.com/). In fact, [here](https://github.com/karam94/adonis-v4-blog) is a link to a blog project I worked on back when AdonisJS was still in version 3. 
 

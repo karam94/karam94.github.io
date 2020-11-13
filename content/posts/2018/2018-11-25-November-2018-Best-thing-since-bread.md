@@ -10,15 +10,7 @@ canonical_url: false
 description: "Our monthly challenge for November 2018 is complete..."
 ---
 
-
-<figure>
-    <img src="https://raw.githubusercontent.com/karam94/karam94.github.io/master/assets/images/karam-gopher.png" style="width: 400px; display: block; margin-left: auto; margin-right: auto;"/>
-    <figcaption>Image Source: https://gopherize.me</figcaption>
-</figure>
-
-Those of you reading this may have come across a previous post titled ["My 24th birthday developer resolutions."](http://www.karam.io/2018/My-24th-birthday-developer-resolutions/), where I touched on my goal of working towards the completion of a new project every month for the next 12 months (until my 25th birthday) with the sole aim of either learning something new or just generally play around with something to broaden my horizons in software development.
-
-I don't want to say the goal was to "learn" [Go](https://golang.org) as such, since a single month doesn't do any programming language justice and can't be mastered over a single year, let alone a single month. However it was more to just expose myself to the language and try it out - as it has been recommended to me by a few colleagues in the past - and to of course, build something with it. In this case, the goal was to build something I needed, which is some sort of automated application [that allows Twitter users to delete all past tweets that contain a list of swear words or instead delete all tweets prior to a specific date](http://www.karam.io/2018/My-24th-birthday-developer-resolutions/).
+I recently decided to try Go out as it was recommended to me by a friend in the past - and to of course, build something with it. In this case, my goal was to build something I needed, which is some sort of automated application [that allows Twitter users to delete all past tweets that contain a list of swear words or instead delete all tweets prior to a specific date](http://www.karam.io/2018/My-24th-birthday-developer-resolutions/).
 
 Here we are two weeks later and the deed is done. It's important to note that the source code to the two projects I have linked to below is by no means perfect or production ready and they certainly have room to be refactored and improved. A very simple example to what I mean being how the web application has inline CSS styling within the views.
 
@@ -41,11 +33,7 @@ It is used in two places. One to format the initial before date input by the use
 You can view the [dirty-tweets-deleter project on GitHub here](https://github.com/karam94/dirty-tweets-deleter).
 
 ## The Web Application
-
-<figure>
-    <img src="https://raw.githubusercontent.com/karam94/karam94.github.io/master/assets/images/dirty-tweet-deleter-screenshot.png" style="width: 700px; display: block; margin-left: auto; margin-right: auto;"/>
-    <figcaption>The logged in Dirty Tweet Deleter UI.</figcaption>
-</figure>
+![A screenshot of the web application](./images/dirty-tweet-deleter-screenshot.png)
 
 The main difference in functionality between the web application and the console application is that the web application limits you to deleting only tweets that contain swear words. If you wish to fork the repository, build on it a date UI or whatever takes your fancy, go for it. However, if I was actually developing a web application around this idea seriously, I would probably refactor the logic in to a Go based API and go for a SPA for the UI. The main motivation behind this is because if someone has a lot of tweets, it can take time to delete them all and with this approach it becomes more straight forward to provide the user with real time visual feedback.
 

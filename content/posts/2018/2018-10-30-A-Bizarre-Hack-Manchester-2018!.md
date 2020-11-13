@@ -9,11 +9,8 @@ cover_image_credits: "<a href='https://unsplash.com/@lazizlid'>Lala Azizli</a>"
 canonical_url: false
 description: "Coffee, ribs, steak and then more coffee..."
 ---
-<figure>
-    <img src="https://raw.githubusercontent.com/karam94/karam94.github.io/master/assets/images/hackmanc1.png"/>
-    <figcaption>Day two... we look like we're smiling, but really we're just dead inside.</figcaption>
-</figure>
 
+![Day two... we look like we're smiling, but really we're just dead inside.](./images/hackmanc1.png)
 
 ## An Introduction
 
