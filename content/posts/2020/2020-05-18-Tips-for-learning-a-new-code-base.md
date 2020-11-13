@@ -11,11 +11,6 @@ description: "Need to quickly learn a new code base or upskill in some technolog
 ---
 I don't usually talk much about my adventures within the professional world of software development on this blog, but I feel like an article about this topic is far too relevant to just about everyone, not to write about.
 
-<figure>
-    <img src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" 
-    style="width: 100%; display: block; margin-left: auto; margin-right: auto;"/>
-</figure>
-
 As you can probably tell from the title, it's about familiarising yourselves with new code bases and unsurprisingly, this situation usually comes to those who have recently changed teams or jobs.
 
 I changed jobs roughly 6 months ago and my new role is within a consultancy, therefore as you can imagine, not only are you required to become familiar with codebases (and sometimes new technologies) relatively often as you swap between new clients, but you also have to be prepared in accomplishing to do so within a relatively quick amount of time becuase you're expected to a certain extent, to hit the ground running.

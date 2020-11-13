@@ -9,10 +9,6 @@ cover_image_credits: "<a href='https://unsplash.com/@sarinaseyes'>Sara Scarpa</a
 canonical_url: false
 description: "I attended the latest Designing Microservices workshop at NDC London 2019..."
 ---
-<figure>
-    <img src="https://raw.githubusercontent.com/karam94/karam94.github.io/master/assets/images/2019-04-12/murder-mystery.jpg" style="display: block; margin-left: auto; margin-right: auto;"/>
-    <figcaption>Image Source: https://twitter.com/honest_update</figcaption>
-</figure>
 
 ## Introduction
 A couple of months ago, I had the pleasure of being sent by work ([we're hiring!](https://www.ao-jobs.com/) 👀) to one of the largest Software Developer Conferences held in the United Kingdom - [NDC London 2019](https://ndc-london.com/). I spent five days there, attending Sam Newman's brilliant workshop titled [Designing Microservices](https://ndc-london.com/workshop/designing-microservices/) for the first two, followed by numerous thought provoking talks the following three days.
@@ -56,10 +52,8 @@ Microservices tend to provide a single service which should equate to a [bounded
 
 We will touch on a technique called Event Storming towards the end of the article which is a fantastic workshop that aims to provide a cheap way of domain modelling with plenty of sticky notes (we all love sticky notes, right?) and is also great at helping us identify these mysterious bounded contexts.
 
-<figure>
-    <img src="https://raw.githubusercontent.com/karam94/karam94.github.io/master/assets/images/2019-04-12/microservices-architecture-definition.jpg" style="display: block; margin-left: auto; margin-right: auto;"/>
-    <figcaption>Image Source: http://www.karam.io/2019/Microservices-101-The-good-the-bad-and-the-ugly/</figcaption>
-</figure>
+![Martin Fowler's Monolith vs Microservices diagram](./images/microservices-architecture-definition.jpg)
+
 
 ## Conway's Law & co.
 
@@ -87,10 +81,9 @@ Once correct domain modelling is achieved, only then can we answer the million d
 
 So to summarise these quotes in to developer layman terms, if ***greater than one*** bounded context of your business organisation aligns to a **unified domain of your software**, this will inevitably result in friction that results in organisational headaches, software headaches and less time spent drinking coffee. Correctly defining bounded contexts within our business domain helps us prevent this.
 
-<figure>
-    <img src="https://raw.githubusercontent.com/karam94/karam94.github.io/master/assets/images/2019-04-12/microservices-spaghetti.png" style="display: block; margin-left: auto; margin-right: auto;"/>
-    <figcaption>Image Source: https://medium.com/@benorama/the-evolution-of-software-architecture-bd6ea674c477</figcaption>
-</figure>
+![Martin Fowler's Monolith vs Microservices diagram](./images/microservices-spaghetti.png)
+
+Image Source: https://medium.com/@benorama/the-evolution-of-software-architecture-bd6ea674c477
 
 ## Food for thought
 
@@ -104,11 +97,10 @@ Resultantly, it eventually becomes inevitable then that different teams would be
 
 If we take an ecommerce business such as Amazon as an example, who actively practice microservice architecture as an example and dumb things down in terms of how their business probably functions on a simplified high level, are the non-IT members of the business who belong within some sort of product fulfillment/delivery/sales business domain working in the same department, let alone within the same team as the people who are responsible for pricing products? The answer is no and whilst this split may seem logically obvious and a natural choice upon which we should also be reflecting in our software to avoid coupling through developing software for the business, upon reflection of these business domains in detail rather than this simplified high level view, it may become clear that our software boundaries may not actually align with how our business aligns. For example, just because fulfillment and delivery both have something to do with a warehouse, doesn't mean the same business function are responsible for both domains. In fact, they are both very different and provide very different capabilities to the business.
 
-<figure>
-    <img src="https://docs.microsoft.com/en-us/azure/architecture/microservices/images/bounded-contexts.png" style="display: block; margin-left: auto; margin-right: auto;"/>
-    <figcaption>After a bounded context is identified, it may be made up of numerous aggregates that too can be considered as candidates to become microservices.</figcaption>
-    <figcaption>Image Source: https://docs.microsoft.com/en-us/azure/architecture/microservices/model/microservice-boundaries</figcaption>
-</figure>
+![Bounded Contexts](https://docs.microsoft.com/en-us/azure/architecture/microservices/images/bounded-contexts.png)
+
+After a bounded context is identified, it may be made up of numerous aggregates that too can be considered as candidates to become microservices.
+Image Source: https://docs.microsoft.com/en-us/azure/architecture/microservices/model/microservice-boundaries
 
 Domain-Driven Design will go even further as to state that our software should be written using ubiquitous language - defined by Eric Evans as common language between developers and users, structured around the domain model - so that even your non-technical stakeholders can probably understand their corresponding business processes written in code - to a certain extent. This hints at our variables or events within our code being named using the same language, the business uses. If a bunch of developers leave, the non-technical business members should be able to explain exactly what does what to the new developers and vice versa.
 
@@ -116,10 +108,9 @@ Software or code is meaningless without context. As a software developer who wor
 
 Blood, sweat and tears is shed trying to extract knowledge from business stakeholders and trying to find some sort of common ground. Event Storming will help us understand domains and extract business processes from our stakeholders in such a way that we are then able to model our software on it. It is a highly effective workshop technique that comes pretty close to being able to finally deliver that. As of early last year, ThoughtWorks decided to adopt [Event Storming on their technology radar](https://www.thoughtworks.com/radar/techniques/event-storming). The awesome thing about Event Storming is that it can be as high level or granular as the facilitators want. This means you can use it to learn about a whole business, a single domain or even apply it to merely a single use case.
 
-<figure>
-    <img src="https://res.cloudinary.com/de4rvmslk/image/upload/f_auto,q_auto,w_700/v1//img/sticky-notes-5.jpg" style="display: block; margin-left: auto; margin-right: auto;"/>
-    <figcaption>Image Source: https://www.boldare.com/blog/event-storming-guide/</figcaption>
-</figure>
+![Event Storming](https://res.cloudinary.com/de4rvmslk/image/upload/f_auto,q_auto,w_700/v1//img/sticky-notes-5.jpg)
+
+Image Source: https://www.boldare.com/blog/event-storming-guide/
 
 So, back to where we first started. Nobody should be walking in to work tomorrow and changing their world in to lots of smaller services for the sake of it, nor should a microservice architecture ever be considered the "default architectural choice" for a software application as the trade-offs and pre-requisites ***(one of the most common being software functions lacking maturity in terms of their continuous delivery practices)*** may not always be right for you and your software function.
 
@@ -134,11 +125,9 @@ A ***single-tiered*** software application containing numerous ***unaligned*** c
 
 A nice explanation and contrast that illustrates the difference between a monolithic application and a microservices architecture is the one below courtesy of [Martin Fowler](https://www.martinfowler.com).
 
-<figure>
-    <img src="https://insights-images.thoughtworks.com/MicroservicesFowler_301b19b9d4631a2900fc19d8048105bb.png
-" style="display: block; margin-left: auto; margin-right: auto;"/>
-    <figcaption>Image Source: https://www.martinfowler.com/articles/microservices.html</figcaption>
-</figure>
+![Martin Fowler's Monolith vs Microservices diagram](https://insights-images.thoughtworks.com/MicroservicesFowler_301b19b9d4631a2900fc19d8048105bb.png)
+
+Image Source: https://www.martinfowler.com/articles/microservices.html
 
 ## Monoliths: The Problems
 
@@ -261,10 +250,9 @@ We've spoken a lot at this point about assessing the trade-offs of microservices
   - These are simple questions that when answered, can potentially highlight whether or not your newly decomposed monolith has indeed been decomposed in to microservices correctly or whether you are still within the distributed monolith phase.
   - Event Storming is a popular workshop technique that helps both development and their related business teams correctly model their domains and reduces the possibility of a lack of understanding that results in overlapping domains that is reflected within the software product.
 
-<figure>
-    <img src="https://raw.githubusercontent.com/karam94/karam94.github.io/master/assets/images/2019-04-12/gatewaydrugworkshop.jpg" style="display: block; margin-left: auto; margin-right: auto;"/>
-    <figcaption>Image Source: http://www.karam.io/2019/Microservices-101-The-good-the-bad-and-the-ugly/</figcaption>
-</figure>
+![Event storming workshop](./images/gatewaydrugworkshop.jpg)
+
+Image Source: http://www.karam.io/2019/Microservices-101-The-good-the-bad-and-the-ugly/
 
 ## The Gateway Drug Workshop
 
@@ -278,11 +266,8 @@ We've spoken a lot at this point about assessing the trade-offs of microservices
 - It's a similar concept to when developers give estimates and don't realise how monumentally off their estimate they really are until they actually get stuck in to the task.
 - So in conclusion, when it comes to decomposing monolithic applications and deciding where to draw your bounded contexts and what they should contain, it matters less how you - the technical person - think it should be decomposed and instead you should let the bounded contexts be drawn automatically by the correct modelling of your business domains which can be achieved by working with the business.
 
-<figure>
-    <img src="https://raw.githubusercontent.com/karam94/karam94.github.io/master/assets/images/2019-04-12/dddbooks.jpg" style="display: block; margin-left: auto; margin-right: auto;"/>
-    <figcaption>Domain-Driven Design by Eric Evans & Domain-Driven Design Distilled by Vaughn Vernon</figcaption>
-    <figcaption>Image Source: http://www.karam.io/2019/Microservices-101-The-good-the-bad-and-the-ugly/</figcaption>
-</figure>
+![Domain-Driven Design by Eric Evans & Domain-Driven Design Distilled by Vaughn Vernon](./images/dddbooks.jpg)
+
 
 ## Domain-Driven Design
 

@@ -13,11 +13,6 @@ If you like [Vue.js](https://vuejs.org/), then you probably already know what [V
 
 The library is developed and maintained by the Vue.js development team, which means it is the official recommended state management library for the framework. No more state management framework arguments!
 
-<figure>
-    <img src="https://images.unsplash.com/photo-1576089388754-68c54a863b60?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
-    style="width: 100%; display: block; margin-left: auto; margin-right: auto;"/>
-</figure>
-
 This post is going to encapsulate a technique I've come across that allows you to easily write tests around your Vuex store that results in far less brittle tests, than unit testing the individual moving parts individually.
 
 Vuex is made up of numerous core concepts. Actions, mutations and getters are the main moving parts. Because they are all written as plain JavaScript functions, they can all therefore be unit tested in isolation quite easily.

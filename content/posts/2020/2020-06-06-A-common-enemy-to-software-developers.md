@@ -26,11 +26,6 @@ Even those of us who do not know how to invert a binary tree off the top of our 
 
 and that my friends, is part of the problem.
 
-<figure>
-    <img src="https://images.unsplash.com/photo-1556353792-a5e0793e94a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80" 
-    style="width: 100%; display: block; margin-left: auto; margin-right: auto;"/>
-</figure>
-
 We are living in an era of digital transformation and technology is booming.
 
 This unfortunately though, can have a knock-on effect to us, the developers.

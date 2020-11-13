@@ -12,10 +12,7 @@ description: "Lambda functions are nice... but sometimes you just want a whole A
 ## Introduction
 I've recently been jumping on the Serverless hype train... and probably rightly so. But the fact that you're reading this article, probably means that you're already riding that train with me, so I'll cut to the chase.
 
-<figure>
-    <img src="http://www.karam.io/assets/images/2019-07-05/deployingserverless.png" 
-    style="width: 100%; display: block; margin-left: auto; margin-right: auto;"/>
-</figure>
+![Deploying Serverless Applications](./images/deployingserverless.png)
 
 Basically, when trying to learn more about the world of Serverless, most tutorials on the internet that I could find around the .NET Core serverless world, seemed to revolve around writing a single individual serverless lambda function written in C# that does one small bit of functionality, sometimes utilising other AWS services to communicate with other lambda functions, all of which don't really exist within any sort of actual scaffolded project.
 

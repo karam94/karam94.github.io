@@ -9,10 +9,6 @@ cover_image_credits: "<a href='https://unsplash.com/@harrisonbroadbent'>Harrison
 canonical_url: false
 description: "So... I won a free Raspberry Pi Zero from Google! Then I bought some USB speakers for it and chaos ensued!"
 ---
-<figure>
-    <img src="https://www.raspberrypi.org/app/uploads/2017/05/Raspberry-Pi-Zero-1-1755x1080.jpg" style="display: block; margin-left: auto; margin-right: auto;"/>
-    <figcaption>Image Source: https://www.raspberrypi.org/</figcaption>
-</figure>
 
 To cut a long story short, I won a FREE [Raspberry Pi Zero](https://www.raspberrypi.org/products/raspberry-pi-zero/) from [Google](http://google.com/) at [NDC London](https://ndc-london.com/) in one of the giveaways they were hosting. In all honesty, I'd never really acquainted myself much with Raspberry Pi's before this happened and always saw myself as someone who was more interested in the web development sphere as opposed to creating little gadgets like the famous [magic mirrors](https://www.raspberrypi.org/blog/magic-mirror/).
 

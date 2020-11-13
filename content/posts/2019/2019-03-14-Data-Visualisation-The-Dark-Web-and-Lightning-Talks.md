@@ -9,10 +9,8 @@ cover_image_credits: "<a href='https://unsplash.com/@k8_iv'>K8</a>"
 canonical_url: false
 description: "Does this title incite you? Well, I have the solution on Tuesday March 19th!"
 ---
-<figure>
-    <img src="https://secure.meetupstatic.com/photos/event/c/4/a/7/highres_479390343.jpeg" style="display: block; margin-left: auto; margin-right: auto;"/>
-    <figcaption>Image Source: https://www.meetup.com/North-West-Tech-Talks/events/259526281/</figcaption>
-</figure>
+
+![](https://secure.meetupstatic.com/photos/event/c/4/a/7/highres_479390343.jpeg)
 
 ## Intrigued?
 Tuesday 19th March 2019 marks the first (of what hopefully will become many) ["North West Tech Talk"](https://www.meetup.com/North-West-Tech-Talks/) events, hosted at our awesome new offices at work at [AO.com](https://www.ao.com) (if you see a desk with loads of red noses on top of the main monitor in a corner somewhere, you've found my battlefield) in wet & windy Bolton (but don't let that put you off, we do have a roof).
