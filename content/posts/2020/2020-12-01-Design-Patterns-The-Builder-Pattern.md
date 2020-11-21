@@ -1,7 +1,7 @@
 ---
 title: "Advent Design Patterns #1: The Builder Pattern"
 date: 2020-12-01
-published: true
+published: false
 tags: ["Design Patterns", "C#", "Advent Design Patterns"]
 series: false
 cover_image: ./images/ashkan-forouzani-_Y82jqFIBgw-unsplash.jpg
