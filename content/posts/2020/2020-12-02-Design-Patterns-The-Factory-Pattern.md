@@ -1,7 +1,7 @@
 ---
 title: "Advent Design Patterns #2: The Factory Pattern"
 date: 2020-12-02
-published: true
+published: false
 tags: ["Design Patterns", "C#", "Advent Design Patterns"]
 series: false
 cover_image: ./images/patrick-hendry-6xeDIZgoPaw-unsplash.jpg
