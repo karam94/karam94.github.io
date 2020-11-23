@@ -10,7 +10,7 @@ canonical_url: false
 description: "The first post of our Advent Design Patterns countdown, it's one of the Creational Patterns... the Builder Pattern!"
 ---
 
-*Welcome to the first of my Advent Design Patterns series where I take a brief look at a design pattern, every day in the build up to Christmas! The reason why I've gone for brief overviews is because I think sometimes, less can be more (KISS, anyone?! Note the misteltoe Christmas pun!) and not everyone always wants to be drowned in text & UML diagrams. This post will cover one of the Creational Patterns, namely the Builder Pattern. If you're looking for a post on one of the other of the Gang of Four Design Patterns, you will most likely find them here.*
+*Welcome to the first of my Advent Design Patterns series where I take a brief look at a design pattern, every day in the build up to Christmas! The reason why I've gone for brief overviews is because I think sometimes, less can be more (KISS, anyone?! Note the misteltoe Christmas pun!) and not everyone always wants to be drowned in text & UML diagrams. My goal is to keep each one of these a maximum of a 5 minute read. This post will cover one of the Creational Patterns, namely the Builder Pattern. If you're looking for a post on one of the other of the Gang of Four Design Patterns, you will most likely find them here.*
 
 -----------------------------
 ## A Brief Overview
