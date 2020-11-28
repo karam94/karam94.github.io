@@ -10,7 +10,7 @@ canonical_url: false
 description: "The second post in my blog post series where I try to cover all of the Gang of Four Design Patterns in five minutes each, this time it's one of the Creational Patterns... the Factory Pattern!"
 ---
 
-_Welcome to the first of my [Five Minute Design Patterns series](https://www.karam.io/blog/tag/Five%20Minute%20Design%20Patterns/) where I take a brief look at a design pattern every week! The reason why I've gone for brief overviews is because I think sometimes, less can be more and not everyone always wants to be drowned in text & UML diagrams. My goal is to keep each one of these a maximum of a 5 minute read as per the calculation that can be seen under the blog title. This post will cover one of the Creational Patterns, namely the Factory Pattern. If you're looking for a post on one of the other of the Gang of Four Design Patterns, you will most likely find them [here](https://www.karam.io/blog/tag/Five%20Minute%20Design%20Patterns/)._
+_Welcome to the second of my [Five Minute Design Patterns series](https://www.karam.io/blog/tag/Five%20Minute%20Design%20Patterns/) where I take a brief look at a design pattern every week! I've gone for brief because I think sometimes, less can be more and not everyone always wants to be drowned in text & UML diagrams. My goal is to keep these to a maximum of a 5 minute read as per the calculation that can be seen under the blog title. This post will cover one of the Creational Patterns - the Factory Pattern. If you're looking for a post on one of the other of the Gang of Four Design Patterns, you will most likely find them [here](https://www.karam.io/blog/tag/Five%20Minute%20Design%20Patterns/)._
 
 ---
 
@@ -24,7 +24,7 @@ There are three common variations of this pattern, the Simple Factory Pattern, t
 
 ## The Simple Factory Pattern
 
-Unsurprisingly, the simplest variation of the Factory Pattern. It refers to the existence of a single re-usable Factory class, which holds the sole purpose and responsibility of abstracting away any underlying logic that object creation might rely on.
+The simplest variation of the Factory Pattern, refers to the existence of a single re-usable Factory class, that holds the sole purpose and responsibility of abstracting away any underlying logic that object creation relies on.
 
 Instead of repeating some sort of conditional `if` or `switch` logic around `brand` every time a `Vehicle` object is required, we can instead abstract it in to one single re-usable place.
 
@@ -37,15 +37,13 @@ public class VehicleFactory
 		{
 			Brand.Honda => new Vehicle(Brand.Honda),
 			Brand.Ferrari => new Vehicle(Brand.Ferrari),
-			Brand.Yamaha => new Vehicle(Brand.Yamaha),
-			_ => throw new NotSupportedException($"The factory unfortunately
-												 cannot construct
+			_ => throw new NotSupportedException($"The factory cannot construct
 												 vehicles of the brand
 												 {brand} at the current time.")
 		};
 
-		// ...think about how this scales as more Shipping Providers are added to the system
-		// If we have to do this every time we add a new Shipping Provider,
+		// ...think about how this scales as more Shipping Providers are added
+		// If we do this every time we add a new Shipping Provider,
 		// are we violating one of the SOLID principles?
 	}
 }
@@ -55,11 +53,9 @@ VehicleFactory.BuildVehicle(Brand.Honda);
 
 ## The Factory Method Pattern
 
-The Factory Method Pattern instead provides an abstract class and method (hence the name, factory method) that facilitates creation of subclasses (e.g. different types of shipping providers).
+The Factory Method Pattern provides an abstract class and method (hence the name) that facilitates creation of subclasses (e.g. different types of shipping providers).
 
-By utilising this abstract class, we can create a Factory for every type of `ShippingProvider` and since our code is dependent on a type of `ShippingProviderFactory`, it automatically can handle its subclasses such as a `StandardShippingProviderFactory`.
-
-Every time we need to introduce a new type of `ShippingProvider` in to the system, we no longer violate the Open-Closed Principle.
+By utilising this abstract class, we create a Factory for every type of `ShippingProvider` and since our code is dependent on a type of `ShippingProviderFactory`, it automatically can handle subclasses such as a `StandardShippingProviderFactory`.
 
 ```csharp
 public abstract class VehicleFactory
@@ -104,10 +100,7 @@ public class ShoppingCart
 
 	public string Checkout()
 	{
-			// The Shopping Cart is extensible to work with any type of current
-			// or future vehicle factory since all current or future vehicle
-			// factories will extend the VehicleFactory abstract class.
-			// Therefore the Shopping Cart can now handle any type of VehicleFactory,
+			// The Shopping Cart can now handle any type of VehicleFactory,
 			// without needing to change any of its implementation details.
 			var carToBuild = _vehicleFactory.GetVehicle();
 			return $"Vehicle built of brand {carToBuild.GetBrand()}
@@ -115,8 +108,6 @@ public class ShoppingCart
 	}
 }
 
-// The ShoppingCart class can now handle any type of VehicleFactory
-// thanks to the parent abstract class...
 var hondaShoppingCart = new ShoppingCart(new VehicleOrder(Brand.Honda),
 										 new HondaFactory());
 var hondaOrderResponse = hondaShoppingCart.Checkout();
@@ -128,7 +119,7 @@ var ferrariOrderResponse = ferrariShoppingCart.Checkout();
 
 ## The Abstract Factory Pattern
 
-The third and final variation of the Factory Pattern is very similar to the Factory Method Pattern. The main difference here is that rather than having a single overridable method within our abstract class, all methods within our factory become abstract and can therefore become overriden. 
+The third and final variation of the Factory Pattern is very similar to the Factory Method Pattern. The main difference here is that rather than having a single overridable method within our abstract class, all methods within our factory become abstract and can therefore become overriden.
 
 I like to think of this as the version of the Factory Pattern that caters for families. For example, in our previous example, a Ferrari vehicle... is a single vehicle. In this example, a UK Shipping Provider... can have a family of various couriers. (Obviously Ferrari have numerous car models too, but play along here!)
 
@@ -141,38 +132,60 @@ public abstract class ShippingProviderFactory
 
 public class UkShippingProviderFactory : ShippingProviderFactory
 {
-    public override IShippingProvider CreateStandardShippingProvider
-                                            => new YodelShippingProvider();
-    public override IShippingProvider CreateExpressShippingProvider
-                                            => new RoyalMailShippingProvider();
+	public override IShippingProvider CreateStandardShippingProvider() 
+											=> new YodelShippingProvider();
+	public override IShippingProvider CreateExpressShippingProvider() 
+											=> new RoyalMailShippingProvider();
 }
 
-public class GermanyShippingProviderFactory : ShippingProviderFactory
+public class RoyalMailShippingProvider : IShippingProvider
 {
-    public override IShippingProvider CreateStandardShippingProvider
-                                            => new DeutschePostShippingProvider();
-    public override IShippingProvider CreateExpressShippingProvider
-                                            => new DHLShippingProvider();
+	public string GetCourierName() => "Royal Mail";
+	public string GetCourierCountryCode() => "UK";
 }
 
+// Extendable as it handles any time of present or future Shipping Provider Factory.
+// e.g. Imagine we introduce French shipping later. No need for code changes in here.
 public class ShoppingCart
 {
-	private readonly ShippingProviderFactory _factory;
-	public ShoppingCart(ShippingProviderFactory factory)
+	private readonly ShippingProviderFactory _shippingProviderFactory;
+
+	public ShoppingCart(ShippingProviderFactory shippingProviderFactory)
 	{
-		_factory = factory;
+		_shippingProviderFactory = shippingProviderFactory;
+	}
+
+	public string Checkout(bool isExpressShipping)
+	{
+		var shippingProvider = isExpressShipping ?
+								_shippingProviderFactory.CreateExpressShippingProvider() :
+								_shippingProviderFactory.CreateStandardShippingProvider();
+
+		var shippingProviderName = shippingProvider.GetCourierName();
+
+		// Note: 
+		// This translation bit violates OCP but our example doesn't revolve around this 
+		// so ignore it... assume we're following the rule of three to refactor this out.
+		if (shippingProvider.GetCourierCountryCode() == "DE")
+		{
+			return $"Ihr Zustellkurier ist: {shippingProviderName}";
+		}
+		else
+		{
+			return $"Your delivery courier is: {shippingProviderName}";
+		};
 	}
 }
 
 var shoppingCart = new ShoppingCart(new UkShippingProviderFactory());
-var shoppingCart = new ShoppingCart(new GermanyShippingProviderFactory());
+shoppingCart = new ShoppingCart(new GermanyShippingProviderFactory());
 ```
 
 ## Conclusion
 
-TL;DR - If you find yourself with a class that has to be compatible with a family of sub-classes, however should be decoupled with regards to how those types are created, then consider one of the variations of the Factory Pattern.
+TL;DR - If you find yourself with a class that has to be compatible with a family of sub-classes, however should be decoupled with regards to how those types are created, consider one of the variations of the Factory Pattern.
 
-By moving out object creation logic in to a factory, we apply the Single Responsibility Principle through ensuring our `ShoppingCart` is told what shipping provider it is using, rather than leave it asking the question of "which shipping provider do I need, in order to correctly calculate the prices?" ([Tell don't ask](https://martinfowler.com/bliki/TellDontAsk.html)). We also get the Open/Closed Principle for free too, since every time we need to introduce a brand new `Vehicle` or `ShippingProvider`, we can do so without having to change any code within the `ShoppingCart`.
+By moving out object creation logic in to a factory, we apply the Single Responsibility Principle through ensuring our `ShoppingCart` is told what shipping provider it is using, rather than leave it asking "which shipping provider do I need, to correctly calculate the prices?" ([Tell don't ask](https://martinfowler.com/bliki/TellDontAsk.html)). We also get the Open/Closed Principle for free too, since every time we need to introduce a brand new `Vehicle` or `ShippingProvider`, we can do so without having to change any code within the `ShoppingCart`.
 
 If you spot any mistakes, do let me know in the comments below!
 
