@@ -1,16 +1,16 @@
 ---
-title: "Advent Design Patterns #1: The Builder Pattern"
-date: 2020-12-01
-published: false
-tags: ["Design Patterns", "C#", "Advent Design Patterns"]
-series: false
+title: "Five Minute Design Patterns #1: The Builder Pattern"
+date: 2020-11-28
+published: true
+tags: ["Design Patterns", "C#", "Five Minute Design Patterns"]
+series: true
 cover_image: ./images/ashkan-forouzani-_Y82jqFIBgw-unsplash.jpg
 cover_image_credits: "<a href='https://unsplash.com/@ashkfor121'>Ashkan Forouzani</a>"
 canonical_url: false
-description: "The first post of our Advent Design Patterns countdown, it's one of the Creational Patterns... the Builder Pattern!"
+description: "The first of posts in my blog post series where I try to cover all of the Gang of Four Design Patterns in five minutes each, this time it's one of the Creational Patterns... the Builder Pattern!"
 ---
 
-*Welcome to the first of my Advent Design Patterns series where I take a brief look at a design pattern, every day in the build up to Christmas! The reason why I've gone for brief overviews is because I think sometimes, less can be more (KISS, anyone?! Note the misteltoe Christmas pun!) and not everyone always wants to be drowned in text & UML diagrams. My goal is to keep each one of these a maximum of a 5 minute read. This post will cover one of the Creational Patterns, namely the Builder Pattern. If you're looking for a post on one of the other of the Gang of Four Design Patterns, you will most likely find them here.*
+*Welcome to the first of my Five Minute Design Patterns series where I take a brief look at a design pattern in every post! The reason why I've gone for brief overviews is because I think sometimes, less can be more and not everyone always wants to be drowned in text & UML diagrams. My goal is to keep each one of these a maximum of a 5 minute read as per the read length calculation on my blog that can be seen under the blog title. This post will cover one of the Creational Patterns, namely the Builder Pattern. If you're looking for a post on one of the other of the Gang of Four Design Patterns, you will most likely find them here.*
 
 -----------------------------
 ## A Brief Overview
