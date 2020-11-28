@@ -10,7 +10,7 @@ canonical_url: false
 description: "The first of posts in my blog post series where I try to cover all of the Gang of Four Design Patterns in five minutes each, this time it's one of the Creational Patterns... the Builder Pattern!"
 ---
 
-*Welcome to the first of my [Five Minute Design Patterns series](https://www.karam.io/blog/tag/Five%20Minute%20Design%20Patterns/) where I take a brief look at a design pattern in every post! The reason why I've gone for brief overviews is because I think sometimes, less can be more and not everyone always wants to be drowned in text & UML diagrams. My goal is to keep each one of these a maximum of a 5 minute read as per the read length calculation on my blog that can be seen under the blog title. This post will cover one of the Creational Patterns, namely the Builder Pattern. If you're looking for a post on one of the other of the Gang of Four Design Patterns, you will most likely find them here.*
+*Welcome to the first of my [Five Minute Design Patterns series](https://www.karam.io/blog/tag/Five%20Minute%20Design%20Patterns/) where I take a brief look at a design pattern every week! The reason why I've gone for brief overviews is because I think sometimes, less can be more and not everyone always wants to be drowned in text & UML diagrams. My goal is to keep each one of these a maximum of a 5 minute read as per the calculation that can be seen under the blog title. This post will cover one of the Creational Patterns, namely the Builder Pattern. If you're looking for a post on one of the other of the Gang of Four Design Patterns, you will most likely find them [here](https://www.karam.io/blog/tag/Five%20Minute%20Design%20Patterns/).*
 
 -----------------------------
 ## A Brief Overview
@@ -23,7 +23,7 @@ By using this pattern, we can both simplify and refine the object construction p
 There are two common variations of this pattern, namely the Builder Pattern alongside the Fluent Builder Pattern.
 
 ## The Builder Pattern vs. The Fluent Builder Pattern
-The Builder Pattern will often always result in a `Builder` class alongside an optional `BuilderDirector` class. Either-or will contain methods that provide constructed objects and using these  gets favoured over using the standard object constructor. Think of the `Director` class as an orchestrator, that knows how to create pre-defined permutations by using the `Builder`. Sometimes as you may have realised by now, you may just want to directly use the `Builder` yourself. In the below example, our `BuilderDirector` contains a pre-defined method that returns a `Car` object pre-configured to match that of a Silver Honda Civic.
+The Builder Pattern will result in a `Builder` class alongside an optional `BuilderDirector` class. Either-or will contain methods that provide constructed objects and using these gets favoured over using the standard object constructor. Think of the `Director` class as an orchestrator that knows how to create pre-defined permutations using the `Builder`. Sometimes as you may have realised by now, you may just want to directly use the `Builder` yourself. In the below example, our `BuilderDirector` contains a pre-defined method that returns a `Car` object pre-configured to match that of a Silver Honda Civic.
 
 ```csharp
 var carBuilder = new CarBuilder(upgradeInventory);
@@ -31,7 +31,7 @@ var carBuilderDirector = new CarBuilderDirector(carBuilder);
 Console.WriteLine(carBuilderDirector.BuildSilverHondaCivic().ToString());
 ```
 
-Obviously it is possible to instantiate a new Car and pass parameters in to the constructor to construct our object, however at scale and with a large number of parameters, this becomes very tedious in a code base where we have to constantly instantiate different permutations of different cars, models, brands, colours, specifications, etc. However on that note, do not go wild and suddenly convert every object instantiation to use this pattern. Use it as a tool, only where necessary.
+Obviously it is possible to instantiate a new Car and pass parameters in to the constructor to construct our object, however at scale and with a large number of parameters, this becomes very tedious in a code base where we have to constantly instantiate different permutations of different cars, models, colours, specifications, etc. However on that note, do not go wild and suddenly convert every object instantiation to use this pattern. Use it as a tool, only where necessary.
 
 The Fluent Builder Pattern provides the exact same functionality as the regular Builder Pattern, however with a fluent interface/API to help facilitate the construction process. This makes life particularly easier for developers going forward within the same codebase, particularly if they want to skip the middle man that is the `Director`. 
 

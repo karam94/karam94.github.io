@@ -1,5 +1,5 @@
 ---
-title: "Advent Design Patterns #2: The Factory Pattern"
+title: "Five Minute Design Patterns #2: The Factory Pattern"
 date: 2020-12-02
 published: false
 tags: ["Design Patterns", "C#", "Advent Design Patterns"]
