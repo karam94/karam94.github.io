@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html data-html-server-rendered="true" lang="en" data-vue-tag="%7B%22lang%22:%7B%22ssr%22:%22en%22%7D%7D">
+  <head>
+    <title>Five Minute Design Patterns #1: The Builder Pattern - Karam.io</title><meta name="gridsome:hash" content="6fe372bab11d0fceef4dd394fd3b9f44e24d1db3"><meta data-vue-tag="ssr" charset="utf-8"><meta data-vue-tag="ssr" name="generator" content="Gridsome v0.7.21"><meta data-vue-tag="ssr" data-key="viewport" name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta data-vue-tag="ssr" data-key="format-detection" name="format-detection" content="telephone=no"><meta data-vue-tag="ssr" data-key="description" name="description" content="I like writing code &amp; playing football. I&#x27;m terrible at both."><meta data-vue-tag="ssr" name="description" content="The first of posts in my blog post series where I try to cover all of the Gang of Four Design Patterns in five minutes each, this time it&#x27;s one of the Creational Patterns... the Builder Pattern!"><link data-vue-tag="ssr" rel="icon" href="data:,"><link data-vue-tag="ssr" rel="icon" type="image/png" sizes="16x16" href="/assets/static/favicon.ce0531f.fcfd982a4fc064582a158198eac8650c.png"><link data-vue-tag="ssr" rel="icon" type="image/png" sizes="32x32" href="/assets/static/favicon.ac8d93a.fcfd982a4fc064582a158198eac8650c.png"><link rel="preload" href="/assets/css/0.styles.7e3a9afe.css" as="style"><link rel="preload" href="/assets/js/app.24c85096.js" as="script"><link rel="preload" href="/assets/js/page--src--templates--post-vue.4ba5e1d2.js" as="script"><link rel="prefetch" href="/assets/js/page--node-modules--gridsome--app--pages--404-vue.d1a22b1b.js"><link rel="prefetch" href="/assets/js/page--src--pages--about-vue.b755caf4.js"><link rel="prefetch" href="/assets/js/page--src--pages--index-vue.9160a3aa.js"><link rel="prefetch" href="/assets/js/page--src--pages--reading-vue.06d29e12.js"><link rel="prefetch" href="/assets/js/page--src--pages--speaking-vue.ad8cd608.js"><link rel="prefetch" href="/assets/js/page--src--templates--tag-vue.5abffd0b.js"><link rel="stylesheet" href="/assets/css/0.styles.7e3a9afe.css"><noscript data-vue-tag="ssr"><style>.g-image--loading{display:none;}</style></noscript>
+  </head>
+  <body >
+    <script>
+      // Add dark / light detection that runs before Vue.js load. Borrowed from overreacted.io
+      (function() {
+        window.__onThemeChange = function() {};
+        function setTheme(newTheme) {
+          window.__theme = newTheme;
+          preferredTheme = newTheme;
+          document.body.setAttribute('data-theme', newTheme);
+          window.__onThemeChange(newTheme);
+        }
+
+        var preferredTheme;
+        try {
+          preferredTheme = localStorage.getItem('theme');
+        } catch (err) { }
+
+        window.__setPreferredTheme = function(newTheme) {
+          setTheme(newTheme);
+          try {
+            localStorage.setItem('theme', newTheme);
+          } catch (err) {}
+        }
+
+        var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        darkQuery.addListener(function(e) {
+          window.__setPreferredTheme(e.matches ? 'dark' : 'light')
+        });
+
+        setTheme(preferredTheme || (darkQuery.matches ? 'dark' : 'light'));
+      })();
+    </script>
+
+    <div id="app" data-server-rendered="true"><header class="header"><div class="header__left"><a href="/" class="logo active"><span class="logo__text"> ← Karam.io </span></a></div><div class="header__right"><div class="header__right__menu"><a href="/about/">About</a><a href="/reading/">Reading</a><a href="/speaking/">Speaking</a></div><button role="button" aria-label="Toggle dark/light" class="toggle-theme"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></div></header><main class="main"><div class="post-title"><h1 class="post-title__text">
+      Five Minute Design Patterns #1: The Builder Pattern
+    </h1><div class="post-meta">28 November 2020 - 5 mins</div></div><div class="post content-box__post"><div class="post__header"><img alt="Cover image" src="data:image/svg+xml,%3csvg fill='none' viewBox='0 0 860 601' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cdefs%3e%3cfilter id='__svg-blur-02eff01d117627941e21af077dcb07d4'%3e%3cfeGaussianBlur in='SourceGraphic' stdDeviation='10'/%3e%3c/filter%3e%3c/defs%3e%3cimage x='0' y='0' filter='url(%23__svg-blur-02eff01d117627941e21af077dcb07d4)' width='860' height='601' xlink:href='data:image/jpeg%3bbase64%2c/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAtAEADASIAAhEBAxEB/8QAGwAAAgMBAQEAAAAAAAAAAAAABgcDBAUCAQD/xAAvEAACAQMDAgQDCQEAAAAAAAABAgMABBEFEiETMQZBUXEHIoEUFSMyQmGRocGx/8QAGAEBAAMBAAAAAAAAAAAAAAAABAIDBQD/xAAfEQACAgMAAgMAAAAAAAAAAAAAAQIRAwQhEvAxQVH/2gAMAwEAAhEDEQA/ANVV4oIvtfu9UmuE01%2bhZwymNpWVlLj1DEAAcgDHJovubE6lGsczMttuBZE4MgHln09fX%2b6oa9cadBAttGqfaEkCLHGnKNxj9hwB38qltzaxt3RDTgnkSqz5dZhg0xbi4V0O3IUJkthcnBPfHbPHNAWufEBZYJGtYp06iNtxkOAOCSfIcjtirtpc6v4wuZkSwQW8MuY0kOIUYE8uf1H9hn2rR0H4dKs082rpFuaQsqocqvAG5V7AnHc59qgnLLFUWNQxSdgP4ca912aKc2RmSOTbySqNHgkqo7scnOQKb%2bmac/SMt%2bmZS%2b5UJyqjy49ffP0rWtLC3s1xBGFOMFjyx9zUzLV2PFGHwUZM0plN1qFlq261Ey0hMK0YupS31/ZXAhbaApBSJsBCBz1H4/gY9jQTqepXelv0UjsHMSi4lEYP6jgADOAxHqMjj1ptywRNZyxOi9EoysuMDaRyKSSW0Rt72FLhGlmOxOsd5kIwcHPt3/5WTvcXe2bOh2XOUMXwL4lsL%2bxsbGFunNsZViJyRt5OP59KMCKX/wANdJhiHWuFczW5/DMm07Scg4I7jBP8mmGRSdWTlj77Qbbio5HXtkZFckVIRXmKQFIGWqxeMytEJEMqgFk3DcAexxV4igvxppcv3laatHcmBY9tuekuHG9iN5bzxlcD39anHroryPxi5Fzxf4jtdNkGmvKUuJoWk4GcLg/6MfWgezhtjBLGYi130HkkUqMRntkZ/NjIxjnGT500PENhBe6RciWKFpViYxvIm7Ycd/I/TNKK7Jj0fqDBkNx%2bfAzkIST9eB7CsndT8lZsaLXjwu6JFqukxSJ4YaS7uLmRVAmbKA%2bbYJ/L/gJpw2ccsdpClw6PMqAOyAhS3ngHnFC3w%2b0%2bM233nKzPdOnSHzHaq8E8EnknzoxpOqqhYbblc6X0RFl3hNy7yMhc849q9xQ9r2mrP4j0q4aedDIrwARNt2Y%2bfcCOck4Hpj3ojNLfKBp22vw4IoT%2bIkV4%2biINPWaSTqrujjAKlR8xL%2bgG3OfXHrW5a6n9o1y90/pbRbRJJv3Z3FiR2xx2rrVroWqQBo%2bos8ohIzjAIPP9VydM6SUotH//2Q==' /%3e%3c/svg%3e" width="860" data-src="/assets/static/ashkan-forouzani-_Y82jqFIBgw-unsplash.07cc2b7.1143a92f98ea8f3c17046cd014df1e3a.jpg" data-srcset="/assets/static/ashkan-forouzani-_Y82jqFIBgw-unsplash.a67b0b2.1143a92f98ea8f3c17046cd014df1e3a.jpg 480w, /assets/static/ashkan-forouzani-_Y82jqFIBgw-unsplash.07cc2b7.1143a92f98ea8f3c17046cd014df1e3a.jpg 860w" data-sizes="(max-width: 860px) 100vw, 860px" class="g-image g-image--lazy g-image--loading"><noscript><img src="/assets/static/ashkan-forouzani-_Y82jqFIBgw-unsplash.07cc2b7.1143a92f98ea8f3c17046cd014df1e3a.jpg" class="g-image g-image--loaded" width="860" alt="Cover image"></noscript><div class="post__header-credits">
+        Image credits: <span><a href='https://unsplash.com/@ashkfor121'>Ashkan Forouzani</a></span></div></div><div class="post__content"><p><em>Welcome to the first of my <a href="https://www.karam.io/blog/tag/Five%20Minute%20Design%20Patterns/" target="_blank" rel="nofollow noopener noreferrer">Five Minute Design Patterns series</a> where I take a brief look at a design pattern every week! The reason why I've gone for brief overviews is because I think sometimes, less can be more and not everyone always wants to be drowned in text &#x26; UML diagrams. My goal is to keep each one of these a maximum of a 5 minute read as per the calculation that can be seen under the blog title. This post will cover one of the Creational Patterns, namely the Builder Pattern. If you're looking for a post on one of the other of the Gang of Four Design Patterns, you will most likely find them <a href="https://www.karam.io/blog/tag/Five%20Minute%20Design%20Patterns/" target="_blank" rel="nofollow noopener noreferrer">here</a>.</em></p>
+<hr>
+<h2 id="a-brief-overview"><a href="#a-brief-overview" aria-hidden="true"><span class="icon icon-link"></span></a>A Brief Overview</h2>
+<ul>
+<li>
+<p>The Builder Pattern is a Creational Design Pattern that aims to separate the construction of a <strong>complex object</strong> from its <strong>internal representation</strong>, instead facilitating a single/same construction process that can be used instead to create all of the different representations.</p>
+<ul>
+<li><strong>complex object</strong> - an object is considered complex when it can be resembled by numerous permutations, sometimes based on some sort of internal logic, also sometimes referred to as an aggregate. e.g. A car object is the complex object and examples of different representations could be... Silver Honda Civic, Red Honda Civic, Black Honda Accord.</li>
+<li><strong>internal representation</strong> - e.g. an object class, within a codebase.</li>
+</ul>
+</li>
+</ul>
+<p>By using this pattern, we can both simplify and refine the object construction process to allow easier creation of different permutations of the complex object, whilst also as a bonus, decreasing any code repetition and increasing code re-usability that may exist otherwise.</p>
+<p>There are two common variations of this pattern, namely the Builder Pattern alongside the Fluent Builder Pattern.</p>
+<h2 id="the-builder-pattern-vs-the-fluent-builder-pattern"><a href="#the-builder-pattern-vs-the-fluent-builder-pattern" aria-hidden="true"><span class="icon icon-link"></span></a>The Builder Pattern vs. The Fluent Builder Pattern</h2>
+<p>The Builder Pattern will result in a <code class="language-text">Builder</code> class alongside an optional <code class="language-text">BuilderDirector</code> class. Either-or will contain methods that provide constructed objects and using these gets favoured over using the standard object constructor. Think of the <code class="language-text">Director</code> class as an orchestrator that knows how to create pre-defined permutations using the <code class="language-text">Builder</code>. Sometimes as you may have realised by now, you may just want to directly use the <code class="language-text">Builder</code> yourself. In the below example, our <code class="language-text">BuilderDirector</code> contains a pre-defined method that returns a <code class="language-text">Car</code> object pre-configured to match that of a Silver Honda Civic.</p>
+<pre class="language-csharp"><code class="language-csharp"><span class="token class-name"><span class="token keyword">var</span></span> carBuilder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">CarBuilder</span><span class="token punctuation">(</span>upgradeInventory<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name"><span class="token keyword">var</span></span> carBuilderDirector <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">CarBuilderDirector</span><span class="token punctuation">(</span>carBuilder<span class="token punctuation">)</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>carBuilderDirector<span class="token punctuation">.</span><span class="token function">BuildSilverHondaCivic</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>Obviously it is possible to instantiate a new Car and pass parameters in to the constructor to construct our object, however at scale and with a large number of parameters, this becomes very tedious in a code base where we have to constantly instantiate different permutations of different cars, models, colours, specifications, etc. However on that note, do not go wild and suddenly convert every object instantiation to use this pattern. Use it as a tool, only where necessary.</p>
+<p>The Fluent Builder Pattern provides the exact same functionality as the regular Builder Pattern, however with a fluent interface/API to help facilitate the construction process. This makes life particularly easier for developers going forward within the same codebase, particularly if they want to skip the middle man that is the <code class="language-text">Director</code>. </p>
+<p>In the below example our <code class="language-text">CarBuilder</code> is a Fluent Builder and provides us with a fluent interface to configure and create the exact car we want. </p>
+<pre class="language-csharp"><code class="language-csharp"><span class="token class-name"><span class="token keyword">var</span></span> customCar <span class="token operator">=</span> carBuilder
+                    <span class="token punctuation">.</span><span class="token function">WithMake</span><span class="token punctuation">(</span>Brand<span class="token punctuation">.</span>Nissan<span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">WithModel</span><span class="token punctuation">(</span><span class="token string">"Skyline"</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">WithNumberOfDoors</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">WithColour</span><span class="token punctuation">(</span>Colour<span class="token punctuation">.</span>Black<span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">Build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>The fluent API is a lot nicer to use and as you see fit, the possibilities to abstract complexity is endless. For example, you could abstract a group of constructor parameters at once if it is logical to do so.</p>
+<pre class="language-csharp"><code class="language-csharp"><span class="token class-name"><span class="token keyword">var</span></span> customCar <span class="token operator">=</span> carBuilder
+                    <span class="token punctuation">.</span><span class="token function">WithModel</span><span class="token punctuation">(</span>Car<span class="token punctuation">.</span>NissanSkyline<span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">WithColour</span><span class="token punctuation">(</span>Colour<span class="token punctuation">.</span>Black<span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">Build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>As a Skyline is always a Nissan and vice versa, along with always having four doors, it is possible to do something as the above. Within the above example, the <code class="language-text">WithModel(Car.NissanSkyline)</code> method on the <code class="language-text">carBuilder</code> somehow has been implemented to know that the enum <code class="language-text">Car.NissanSkyline</code> needs to provide you a new <code class="language-text">Car</code> with the correct brand, model and number of doors.</p>
+<h2 id="a-brief-high-level-overview"><a href="#a-brief-high-level-overview" aria-hidden="true"><span class="icon icon-link"></span></a>A Brief High Level Overview</h2>
+<p>Whilst UML class diagrams work well for Design Pattern overviews, as I said in the introduction, I'm looking to keep things simple and avoid them throughout this <a href="https://www.karam.io/blog/tag/Five%20Minute%20Design%20Patterns/" target="_blank" rel="nofollow noopener noreferrer">Five Minute Design Pattern series of blog posts</a>.</p>
+<p>Our Program can optionally depend on a <code class="language-text">CarBuilderDirector</code>.</p>
+<pre class="language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CarBuilderDirector</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">readonly</span> <span class="token class-name">ICarBuilder</span> _carBuilder<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">CarBuilderDirector</span><span class="token punctuation">(</span><span class="token class-name">ICarBuilder</span> carBuilder<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        _carBuilder <span class="token operator">=</span> carBuilder<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name">Car</span> <span class="token function">BuildSilverHondaCivic</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        _carBuilder
+            <span class="token punctuation">.</span><span class="token function">WithMake</span><span class="token punctuation">(</span>Brand<span class="token punctuation">.</span>Honda<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">WithModel</span><span class="token punctuation">(</span><span class="token string">"Civic"</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">WithNumberOfDoors</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">WithColour</span><span class="token punctuation">(</span>Colour<span class="token punctuation">.</span>Silver<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> _carBuilder<span class="token punctuation">.</span><span class="token function">Build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name">Car</span> <span class="token function">BuildRedToyotaYaris</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        _carBuilder
+            <span class="token punctuation">.</span><span class="token function">WithMake</span><span class="token punctuation">(</span>Brand<span class="token punctuation">.</span>Toyota<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">WithModel</span><span class="token punctuation">(</span><span class="token string">"Yaris"</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">WithNumberOfDoors</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">WithColour</span><span class="token punctuation">(</span>Colour<span class="token punctuation">.</span>Red<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> _carBuilder<span class="token punctuation">.</span><span class="token function">Build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Within the below <code class="language-text">CarBuilder</code> class we see one of the main perks of the Builder Pattern at play. We have some business logic that determines whether we can create a <code class="language-text">Car</code> object with a specific upgrade, depending on whether it is in stock or not. </p>
+<p>When not employing the Builder Pattern, we might usually see this sit within the constructor of the <code class="language-text">Car</code> object. Therefore by using a <code class="language-text">CarBuilder</code>, we can separate the complex construction of the object from its internal representation, as per our initial definition of this pattern.</p>
+<pre class="language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CarBuilder</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">ICarBuilder</span></span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token class-name">Car</span> _car<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">readonly</span> <span class="token class-name">IEnumerable<span class="token punctuation">&lt;</span>Upgrade<span class="token punctuation">></span></span> _upgradesInStock<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">CarBuilder</span><span class="token punctuation">(</span><span class="token class-name">IEnumerable<span class="token punctuation">&lt;</span>Upgrade<span class="token punctuation">></span></span> upgradesInStock<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">ResetBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        _upgradesInStock <span class="token operator">=</span> upgradesInStock<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">ResetBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        _car <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Car</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name">ICarBuilder</span> <span class="token function">WithMake</span><span class="token punctuation">(</span><span class="token class-name">Brand</span> brand<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        _car<span class="token punctuation">.</span><span class="token function">SetBrand</span><span class="token punctuation">(</span>brand<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name">ICarBuilder</span> <span class="token function">WithModel</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span></span> model<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        _car<span class="token punctuation">.</span><span class="token function">SetModel</span><span class="token punctuation">(</span>model<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name">ICarBuilder</span> <span class="token function">WithNumberOfDoors</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> numberOfDoors<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        _car<span class="token punctuation">.</span><span class="token function">SetNumberOfDoors</span><span class="token punctuation">(</span>numberOfDoors<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name">ICarBuilder</span> <span class="token function">WithColour</span><span class="token punctuation">(</span><span class="token class-name">Colour</span> colour<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        _car<span class="token punctuation">.</span><span class="token function">SetColour</span><span class="token punctuation">(</span>colour<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// By using the Builder Pattern, we separate</span>
+    <span class="token comment">// this complex construction logic of the Car object</span>
+    <span class="token comment">// (which is based on whether an upgrade is in stock or not),</span>
+    <span class="token comment">// from the internal representation of the Car.</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">ICarBuilder</span> <span class="token function">WithUpgrade</span><span class="token punctuation">(</span><span class="token class-name">Upgrade</span> upgrade<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>_upgradesInStock<span class="token punctuation">.</span><span class="token function">Contains</span><span class="token punctuation">(</span>upgrade<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        _car<span class="token punctuation">.</span><span class="token function">AddUpgrade</span><span class="token punctuation">(</span>upgrade<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name">Car</span> <span class="token function">Build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> builtCar <span class="token operator">=</span> _car<span class="token punctuation">;</span>
+        <span class="token function">ResetBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> builtCar<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h2 id="conclusion"><a href="#conclusion" aria-hidden="true"><span class="icon icon-link"></span></a>Conclusion</h2>
+<p>TL;DR - If you find yourself with a complex object within your codebase that can be constructed in many different permutations and this is leading to lots of large constructors repeated everywhere and more headaches of that sort... then the Builder Pattern might be just what you're looking for.</p>
+<p>If you spot any mistakes, do let me know in the comments below.</p>
+<h2 id="source-code"><a href="#source-code" aria-hidden="true"><span class="icon icon-link"></span></a>Source Code</h2>
+<p>In order to keep the blog posts within this series short and sweet, I've not dumped all of the source code on the posts. If you want to see the full working implementation of the above and explore it yourself, feel free to get the source code from the link below.</p>
+<p><a href="https://github.com/karam94/CSharpDesignPatterns/tree/main/Creational" target="_blank" rel="nofollow noopener noreferrer">https://github.com/karam94/CSharpDesignPatterns/tree/main/Creational</a></p>
+<p>Thanks for reading! 👋</p>
+</div><div class="post__footer"><div class="post-tags"><a href="/blog/tag/Design%20Patterns/" class="post-tags__link"><span>#</span> Design Patterns
+  </a><a href="/blog/tag/C%23/" class="post-tags__link"><span>#</span> C#
+  </a><a href="/blog/tag/Five%20Minute%20Design%20Patterns/" class="post-tags__link"><span>#</span> Five Minute Design Patterns
+  </a></div></div></div><div><div class="coffee__container"><h4>Enjoyed this blog post? 😄</h4><a href="https://www.buymeacoffee.com/karam" target="_blank"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee :)&emoji=&slug=karam&button_colour=FFDD00&font_colour=000000&font_family=Comic&outline_colour=000000&coffee_colour=ffffff"></a></div></div><div class="post-comments"><div class="content-box__comments"><div id="disqus_thread" identifier="Five Minute Design Patterns #1: The Builder Pattern" style="min-height:200px;"></div></div></div></main><footer class="footer"><span>Made with
+      <span style="color: red"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-heart fa-w-16"><path fill="currentColor" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path></svg></span>
+      in wet &amp; rainy
+      <a href="//en.wikipedia.org/wiki/Lancashire" target="_blank">Lancashire</a>!</span><br><span>© Copyright 2021 -
+      <a href="//karam.io">Karam.io</a></span></footer></div>
+    <script src="/assets/js/app.24c85096.js" defer></script><script src="/assets/js/page--src--templates--post-vue.4ba5e1d2.js" defer></script>
+  </body>
+</html>

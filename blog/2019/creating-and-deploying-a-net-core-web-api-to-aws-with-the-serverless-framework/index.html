@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html data-html-server-rendered="true" lang="en" data-vue-tag="%7B%22lang%22:%7B%22ssr%22:%22en%22%7D%7D">
+  <head>
+    <title>Creating &amp; deploying a .NET Core Web API to AWS with the Serverless Framework. - Karam.io</title><meta name="gridsome:hash" content="6fe372bab11d0fceef4dd394fd3b9f44e24d1db3"><meta data-vue-tag="ssr" charset="utf-8"><meta data-vue-tag="ssr" name="generator" content="Gridsome v0.7.21"><meta data-vue-tag="ssr" data-key="viewport" name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta data-vue-tag="ssr" data-key="format-detection" name="format-detection" content="telephone=no"><meta data-vue-tag="ssr" data-key="description" name="description" content="I like writing code &amp; playing football. I&#x27;m terrible at both."><meta data-vue-tag="ssr" name="description" content="Lambda functions are nice... but sometimes you just want a whole API!"><link data-vue-tag="ssr" rel="icon" href="data:,"><link data-vue-tag="ssr" rel="icon" type="image/png" sizes="16x16" href="/assets/static/favicon.ce0531f.fcfd982a4fc064582a158198eac8650c.png"><link data-vue-tag="ssr" rel="icon" type="image/png" sizes="32x32" href="/assets/static/favicon.ac8d93a.fcfd982a4fc064582a158198eac8650c.png"><link rel="preload" href="/assets/css/0.styles.7e3a9afe.css" as="style"><link rel="preload" href="/assets/js/app.24c85096.js" as="script"><link rel="preload" href="/assets/js/page--src--templates--post-vue.4ba5e1d2.js" as="script"><link rel="prefetch" href="/assets/js/page--node-modules--gridsome--app--pages--404-vue.d1a22b1b.js"><link rel="prefetch" href="/assets/js/page--src--pages--about-vue.b755caf4.js"><link rel="prefetch" href="/assets/js/page--src--pages--index-vue.9160a3aa.js"><link rel="prefetch" href="/assets/js/page--src--pages--reading-vue.06d29e12.js"><link rel="prefetch" href="/assets/js/page--src--pages--speaking-vue.ad8cd608.js"><link rel="prefetch" href="/assets/js/page--src--templates--tag-vue.5abffd0b.js"><link rel="stylesheet" href="/assets/css/0.styles.7e3a9afe.css"><noscript data-vue-tag="ssr"><style>.g-image--loading{display:none;}</style></noscript>
+  </head>
+  <body >
+    <script>
+      // Add dark / light detection that runs before Vue.js load. Borrowed from overreacted.io
+      (function() {
+        window.__onThemeChange = function() {};
+        function setTheme(newTheme) {
+          window.__theme = newTheme;
+          preferredTheme = newTheme;
+          document.body.setAttribute('data-theme', newTheme);
+          window.__onThemeChange(newTheme);
+        }
+
+        var preferredTheme;
+        try {
+          preferredTheme = localStorage.getItem('theme');
+        } catch (err) { }
+
+        window.__setPreferredTheme = function(newTheme) {
+          setTheme(newTheme);
+          try {
+            localStorage.setItem('theme', newTheme);
+          } catch (err) {}
+        }
+
+        var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        darkQuery.addListener(function(e) {
+          window.__setPreferredTheme(e.matches ? 'dark' : 'light')
+        });
+
+        setTheme(preferredTheme || (darkQuery.matches ? 'dark' : 'light'));
+      })();
+    </script>
+
+    <div id="app" data-server-rendered="true"><header class="header"><div class="header__left"><a href="/" class="logo active"><span class="logo__text"> ← Karam.io </span></a></div><div class="header__right"><div class="header__right__menu"><a href="/about/">About</a><a href="/reading/">Reading</a><a href="/speaking/">Speaking</a></div><button role="button" aria-label="Toggle dark/light" class="toggle-theme"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></div></header><main class="main"><div class="post-title"><h1 class="post-title__text">
+      Creating &amp; deploying a .NET Core Web API to AWS with the Serverless Framework.
+    </h1><div class="post-meta">5 July 2019 - 13 mins</div></div><div class="post content-box__post"><div class="post__header"><img alt="Cover image" src="data:image/svg+xml,%3csvg fill='none' viewBox='0 0 860 483' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cdefs%3e%3cfilter id='__svg-blur-f1a18b6833199e15b1d1a31addabfaf4'%3e%3cfeGaussianBlur in='SourceGraphic' stdDeviation='10'/%3e%3c/filter%3e%3c/defs%3e%3cimage x='0' y='0' filter='url(%23__svg-blur-f1a18b6833199e15b1d1a31addabfaf4)' width='860' height='483' xlink:href='data:image/jpeg%3bbase64%2c/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAkAEADASIAAhEBAxEB/8QAGwAAAQUBAQAAAAAAAAAAAAAAAAECAwQFBgf/xAArEAABAwMDAwIGAwAAAAAAAAABAgMRAAQhBRIxE0FhBlEUIoGRsdEVJFL/xAAXAQADAQAAAAAAAAAAAAAAAAAAAQID/8QAGhEBAQEBAQEBAAAAAAAAAAAAAAERIQISMf/aAAwDAQACEQMRAD8A8dTKo2gkkxirx09wOt7wpDawPmjwCfzVTT2HHnGy2YUVxkwO37rdvptbtmzWtShtBgqnKgO/0FTfXV%2bfOur0H0np9x6eXcOIS86JO4JVj5T5zU/qL0rpdno6Xmbfa50ySUgzIBzntiudSwr%2bKXcF25SsQEpUNgHPb2xj61DqhesNFYu/iVqF0hTW0mcHmPFTLp8hllo9ouxdW4tKndoKQDlPPI%2b1UHtMbTp7bwJ6q90J94oYSm7SFBagstjCVEZjH4p1vbrXpanw6pQHUETgQk%2b%2bRU/V/dLm4wyqOaN1Qrd3ZntTOpWyFnTbxLamkrjaVEccTFWtXvutraXCSAlKQY5wK59KyIjsZqW4fW4%2bHFKlUDNTnTldW9qbjlmsDpo3qG5uNx4POefFVfUz1wm1s2nUBLKdwbUByJ%2b1ZzL5Tp6jDUhY4Hgmmavcddu3MQds481MnRbVm1vHkaepKXnEpA3ACAJ%2bmaaLgDSUSsSVKBSME/us5g/13MkQP9Y%2b1Dygq1byQdyjE47U7CR7zRvqGaJqwKKKKAclRCdvYnInmkUpSgNxJjAntRRSBUL2giJB5EnNISYicDtRRQCUUUUw/9k=' /%3e%3c/svg%3e" width="860" data-src="/assets/static/taylor-vick-M5tzZtFCOfs-unsplash.07cc2b7.0569080ee39d75959ccf93464efc21f1.jpg" data-srcset="/assets/static/taylor-vick-M5tzZtFCOfs-unsplash.a67b0b2.0569080ee39d75959ccf93464efc21f1.jpg 480w, /assets/static/taylor-vick-M5tzZtFCOfs-unsplash.07cc2b7.0569080ee39d75959ccf93464efc21f1.jpg 860w" data-sizes="(max-width: 860px) 100vw, 860px" class="g-image g-image--lazy g-image--loading"><noscript><img src="/assets/static/taylor-vick-M5tzZtFCOfs-unsplash.07cc2b7.0569080ee39d75959ccf93464efc21f1.jpg" class="g-image g-image--loaded" width="860" alt="Cover image"></noscript><div class="post__header-credits">
+        Image credits: <span><a href='https://unsplash.com/@tvick'>Taylor Vick</a></span></div></div><div class="post__content"><h2 id="introduction"><a href="#introduction" aria-hidden="true"><span class="icon icon-link"></span></a>Introduction</h2>
+<p>I've recently been jumping on the Serverless hype train... and probably rightly so. But the fact that you're reading this article, probably means that you're already riding that train with me, so I'll cut to the chase.</p>
+<p><img class="g-image g-image--lazy g-image--loading" src="data:image/svg+xml,%3csvg fill='none' viewBox='0 0 2265 500' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cdefs%3e%3cfilter id='__svg-blur-683dff52612b7bb0624ea3b27618d276'%3e%3cfeGaussianBlur in='SourceGraphic' stdDeviation='40'/%3e%3c/filter%3e%3c/defs%3e%3cimage x='0' y='0' filter='url(%23__svg-blur-683dff52612b7bb0624ea3b27618d276)' width='2265' height='500' xlink:href='data:image/png%3bbase64%2ciVBORw0KGgoAAAANSUhEUgAAAEAAAAAOCAYAAACfOxrCAAAACXBIWXMAAAsTAAALEwEAmpwYAAAKFElEQVRIx6VXCVQUVxat6nZiZpLMjGhkaZbuqu7q7urqpmm2AQSaRWwIghBIBFHcEEVRBJO4gAqoaEQFGgQUATdccB9BBzWJBjHRiVuIUXMyyTExCypRExS66Xrzq3oR45wzc87UOe%2b89/9/v/5797///vvYBzNVGPf96z0frGM6jVUYCMHgukDB41J/Qc8KX37sYYk/NvQrnaXheXWBH1Y4jRZ8vj0Gv9kSh3N9N1tin9OVSCTY//qJxWKHnKGp5HnW3zZjGepK4SSm4tkYkrk%2bRHx7ko3zttbQPP8icxT2dI%2bPEAAcYwDX8b7taoG9fb%2bCsQoX56rxoxkKwe8N4oB4hIDgJzeGYzVzrY4veJvCD6wKEfa2J%2bFD9bcXBg7rrI0SwKcZfFtDS%2b0gvIRopFgicfKWSZ20MtlImiRHBsgpJ4ognFD/KEIiecUOQrRPGj8vjd6EFcQ2O%2bxCDo/MYCpH2tuT1BUCOzAcCA8qrJv5ddowDO4aHLb9MB5z%2bn4s9lcHEGeYZ77eLfR9zummJNkqFA1HLO8H%2bjkm1IQ4xrOTyOf0l02lczsq9Gd/O53iPbQfLqRjnl6SYZxMEEQeAoBFvEckFvdy5InIxcur10siuY/6%2b9F4ByLeMLHEi3c%2bO7iWd2Kypmo8cv4jRA9QZDzg5EydMZ4bi3dZgxfENTvWvZX%2bOtrps7z8yChKeXo87txAZ07PwMezf3xyJPJEb/moCN6%2bq77PNu96nvefj2UoF32x0LtrdwrFPir2B9gUBE/XBJwcKAvgESpPVeOpUXLewJkJxOtHysbkfHc4wbB8uurm7b1xcH2HYVPe21TSx5uj3rSHHa0gX7IBsEomkwFylg1RKiAUkY6iwMCogJZKgSBJQDrdaPeHc/pSkhJk%2bzfya80JrV%2bQqa6FKerNkE5XQJqiAiarkCyvhlRZeR6nk0iUCOQkjcXrZFhfZwg/r69RtgJuzAXoPwzQexTg4TGAp/sBLk6Gx3WSaZyO5ZjWGgnnZjF1N/N94NvFOmidKLfcXaaD7gLNiWsLNT33V/p9%2b%2bV7vnx4ws0IfsKyTHrVmaoIOLgmhEUAmD80RphvtcSZ95YEwbXmcfDd4QmM9czl4TYAVlDIUbTjA4XBgZalQQHsLD8deyAmkg1XKszuEgmQBHEZRcDL1nlWALOD69T5sU1QkrEfZvjXmHKjtrFL3tzNoh03rc06DAsNTfCG82rv3x/dR5tEYfBpJAx%2bW8TePpxlfnI5n/2la77l6%2bNzTHC3EMyng/ofLHeROiacncVsuTrfG74s0D7djwD4ucgXPslRd9QmkHnnspmryCABJnQb4acmKU5/yRTaeKpCD8fXh0FJlhrOVkdauuqioWGxP9zYHQvwyUQ%2bEynlZJANgBJKJgVXL7EpN8CXTdaoYUlQABj1YyBEoRj0sAJw3aY7mpZpCU6eFVyzvij5ILQ3f2YyLmqHyvw2dktRBzsvsgHqCztM7xj2Qqp0Qxmnq5WOGZEUSfLnHNoUjZ0LlPDROMbU6uwO3eU%2b7IUCNXvUwwNOxTAD11cqAdqVy4YCUH8NAXCzQGtGEQDfL9VZuvO08MMyX7iep7lsTNeIRZ6SYilJ1IxyETuXzWacy%2bfpxpyrjggtnsl0f9YYA111kcYw7WifUxUR/stmBI5A5z8TOXMUkTPaWQSADMQEacrQadkpvj5QFxkGWyPDQa%2biBz3REUAA/BPpiZB%2bGUlIjZgQe2VuWMPuddOOQ1V%2bm7nV2MXuWncWthSdYrOCatmymYfMOcFNkKGsaXSWvOpLEuQaqZQoxTHCGz5SnrhRSELna5LBK5SUfdxGQc9OGXvZVcqeHSU236mQAnuSbhoKQO2VXB4AE4oA9i5y/Pws5U8fZqn2XpyrOV/%2bllrh5ikpl0mJHRju5rJuni7%2bROUbh348OX3n%2blzfnzs3R8ClpsRLTSWxzV/uS27csVIvH%2b3qlU2SxCl0rkn0FSMOLi4uJkYsZhlPD4igZBApp0AichsUubsDcv4Sch5dBkSVlJRxxv0lf9z26rVTj8M743eYVmbsg7VZhzjH%2bQiYq99qyg5ohCmq2o2veWEMSchKKRlRjFKoHI4pW%2bErBu5tp8w9TRQLNxgWPlexP2yWwcNWuQm%2bUkNfi7JiKAC7bhX48AC0TlRYfirUwcOqxKrvKyc23ikK/JlXchI76xhSzYlLM%2bmGztpI6KiMgjVztPBBld7c05YCJzfp4btD41GimaixHYEojotEopLQsDBISUkxjQkPZ2Pj49mo2Fg2wmBgE5OSBg0GA6AkyR8BqVTqLpeqFJyco69NWBCxHeZHNZhXTtprKZ26n92Ye5QtmbLPkk5vMmdqUHLUVMdxugrS2y3Mj3Dj5N8alTlwlYEHpxUDn9UT7O0dJHurmWQvbyUtv55TmOACA73VqjgHAF2zmbGoCLp0e5EW9r0th7tLdQD10dC/Ft0Eq/2Wi0jmuRrh3QxF2oHVIb3I8a7l0%2bn75%2bui4GpTzOdVC31uXKiPvvbjsWTXofpubm4r9Xo9pKenD4SFhlqSk5Mt0VFRlnExMZa0tDRzQkICUBR1Zfjw4X%2b0z/FT6oUcz41saHnPsB%2bWJO%2bCFWl7LEUTWyxFb7VAQfReyNQa9/yngmodpnnJcpS%2baP5ACaUT3C3v6kWDi8JFgxvSPVj4RAWmVvqgNdkivC7P1/CZenGwx/DzcxgtqgMuodugf2C1rvzOuyo3%2b0%2bTAin81de98Idt4/g2SoIjAI4MK5ymOtO9ywB3DiXM4PqPrA39E8dr3gnGUR7gr0F0BEpQiIOrqyt4enoCigjwQAmJI66P42i8Wy6X/4HT9xJ7CooM7bxd86O3DZsXsbUKhXx/rr4JcvWNkBO2pR8BU1W54O98nZHqvxj3lIgw4QgxdqXUWtDdmseMZo/QbaZ/0PDNThrutNDAyeZWVXO7ype/bR5sYKy1wJkZKqHd0QNpcicEioe9/WSVn/CbwgBePpRvvXG2LQlwFBEIAHH7hvB4uDrlZUdE1Ufz4%2bhM4rZKUIxCOwXtciLiExCfwHGbnIjCPwUdf/7GQG1MRflgtt13rLNg7DZPBEYCosS8mEaHfdkhdbitSsT6tin5vl%2bMSkfE9tWoAuAgPRsO0DMfljOMvf/eOpvzxyZbJ%2b15i%2bKiwTHx3go/4W%2br/fHhw6x6vcV%2b6A3ApwBsjHYU1rY%2bjCuHnyuFW4qDcBQZ1vdCFvN/vQWQ8za%2bFUfyC2U6igoBKpL49VFE8ACczvbBnuykbSDQOID7C2vAfRLveV%2bNW3OFtXTG6hOkGAp7Xt6dSuGoHsDhxFjrj0r8XvgJ9xhaM9sKRuFUGj%2b5MVzYdzrV%2bgjZFfvCQwhxHJHwv5DADoJ9ngOEiAY%2bGhAJbYQ/A6jhOdtiqBHYo3orCPc2MNivTbSgb49S2NdCCx9vUwl%2bKrO%2bZ3qNaqwZlSv/BvQ1Y0lZCChWAAAAAElFTkSuQmCC' /%3e%3c/svg%3e" width="2265" alt="Deploying Serverless Applications" data-srcset="/assets/static/deployingserverless.82a2fbd.0a8a34d26b6667c577b3f274e11d70b5.png 480w, /assets/static/deployingserverless.cbab2cf.0a8a34d26b6667c577b3f274e11d70b5.png 1024w, /assets/static/deployingserverless.2665e34.0a8a34d26b6667c577b3f274e11d70b5.png 1920w, /assets/static/deployingserverless.d4f6efc.0a8a34d26b6667c577b3f274e11d70b5.png 2265w" data-sizes="(max-width: 2265px) 100vw, 2265px" data-src="/assets/static/deployingserverless.d4f6efc.0a8a34d26b6667c577b3f274e11d70b5.png"><noscript><img class="g-image g-image--lazy g-image--loaded" src="/assets/static/deployingserverless.d4f6efc.0a8a34d26b6667c577b3f274e11d70b5.png" width="2265" alt="Deploying Serverless Applications"></noscript></p>
+<p>Basically, when trying to learn more about the world of Serverless, most tutorials on the internet that I could find around the .NET Core serverless world, seemed to revolve around writing a single individual serverless lambda function written in C# that does one small bit of functionality, sometimes utilising other AWS services to communicate with other lambda functions, all of which don't really exist within any sort of actual scaffolded project.</p>
+<p><img src="https://media.giphy.com/media/F5p9Uuz3F1a3S/giphy.gif" alt="Joining the world of Serverless!"></p>
+<p>This was all great and useful for learning purposes and also helped me understand the potential power of lambda functions. For example, the idea that you can have a small bit of code that can be triggered and run whenever you like... sets my imagination on fire!</p>
+<p><img src="https://media.giphy.com/media/ule4vhcY1xEKQ/giphy.gif" alt="Joining the world of Serverless!"></p>
+<p>BUT it deviated too much from my regular .NET Core developer workflow. I had questions on the developer scalability and developer experience of trying to replicate what was being taught on a larger scale - such as the first iteration a relatively large and complex CRUD-ish API. I just wanted something that got to the point and said, you have a fully blown .NET Core API that you wrote two years ago that you now want to run serverless-ly? Okay, here's what you do...</p>
+<p>For example if one needs to build a .NET Core API, chances are they will probably go for a quick:</p>
+<pre class="language-bash"><code class="language-bash">dotnet new webapi</code></pre>
+<p>...and take things from there. The .NET CLI will generate the project scaffolding needed and in a matter of seconds, you can do things like play around with middleware, create new controllers &#x26; so on.</p>
+<p>Whilst you can extract different bits of functionality in to lots of different smaller lambdas, I do believe that if you are entering the unknown and are building something brand new that exceeds a certain threshold of complexity, the problem at hand isn't a new problem. It's the old monolith-first strategy that we should be following and that monolith, may be a large API that all lives under one roof until we can actually start dissecting and extracting it in to smaller chunks later.</p>
+<p>So, I wanted to figure out if there was a way for me to develop my .NET Core Web APIs, following what I consider to be the general standardised workflow and then be able to deploy it as a serverless API as a whole, not having to worry about its modularisation as lots of smaller lambdas/functions. Basically, my deployment choices shouldn't affect my development choices. I should be able to deploy whatever I want, regardless of how it is written or its general size.</p>
+<h2 id="what-is-the-serverless-framework"><a href="#what-is-the-serverless-framework" aria-hidden="true"><span class="icon icon-link"></span></a>What is the Serverless Framework?</h2>
+<p><img src="https://files.readme.io/ffb4c59-Serverless.png" alt="The Serverless Framework"></p>
+<p>The <a href="https://serverless.com/" target="_blank" rel="nofollow noopener noreferrer">Serverless Framework</a> is an open source framework (that comes with an awesome CLI) that aims to help us configure and deploy serverless functions written in numerous technology stacks, to numerous cloud providers.</p>
+<p>If you've ever written and deployed a lambda function to AWS without using any sort of tooling (yes, I've been there... wrote a Python script to run every fortnight to check for redundant security groups etc...) you'll know how tiresome the process of zipping your code project up and uploading it is (or even worse, using the in-browser IDE thing) as well as having to then configure your lambda through the UI that AWS provide in the web console.</p>
+<p>This approach is usually okay for small projects such as my given example above of the single Python script for example (even though dealing with PIP dependencies was still a little tedious) but obviously it is not scalable. You also cannot commit your lambda's configuration to some sort of source control too which itself raises potential hiccups waiting to happen.</p>
+<p>The goal of the Serverless Framework quite simply, is to streamline your deployment process as much as possible.</p>
+<h2 id="what-alternatives-are-there-and-why-should-i-use-the-serverless-framework-in-particular"><a href="#what-alternatives-are-there-and-why-should-i-use-the-serverless-framework-in-particular" aria-hidden="true"><span class="icon icon-link"></span></a>What alternatives are there and why should I use the Serverless Framework in particular?</h2>
+<p>Alternatives include AWS's very own <a href="https://aws.amazon.com/serverless/sam/" target="_blank" rel="nofollow noopener noreferrer">SAM</a> or even the <a href="https://aws.amazon.com/blogs/developer/aws-serverless-applications-in-visual-studio/" target="_blank" rel="nofollow noopener noreferrer">official AWS Visual Studio tooling for Visual Studio</a>. </p>
+<p>However, I personally prefer using the Serverless Framework for a few reasons:</p>
+<ul>
+<li>Quite simply, I prefer its workflow due to the minimalistic CLI more to the alternatives.</li>
+<li>As I often use varied technology stacks when working on projects at home such as NodeJS or Python, the Serverless Framework's compatibility with these means I don't have to deviate away from what I'm used to when it comes to deploying my lambdas. If I decide to randomly try and deploy something to Azure one day, I don't need to learn some other way of deployment.</li>
+<li>The Serverless Framework comes with an incredibly healthy and large open source community behind it, which means there are plenty of plugins for it.</li>
+<li>The Serverless Framework allows you to debug your deployed lambdas, locally really easily within your IDE of choice such as Visual Studio Code which means you can utilise breakpoints &#x26; so forth. Note that this is not a unique feature of the Serverless Framework, but it is in this case, really easy to get it up and running which is cool.</li>
+<li>Whilst the AWS Visual Studio tooling may use a more familiar (to some) CloudFormation-style configuration file and the deployment process within the IDE is really quick (bar the fact that you need to have previously created an S3 bucket to upload your code to beforehand), it is essentially a dependency on having Visual Studio installed. So, if you don't have Visual Studio installed, you can't deploy your lambda and you'd probably end up running the Serverless Framework or something else in your CI/CD pipeline anyways.</li>
+<li>The Serverless framework automatically offloads the creation of an S3 bucket to host your uploaded artifacts off you and as a result, gets you from zero to hero as fast as possible.</li>
+</ul>
+<h2 id="so-what-will-we-be-doing-today"><a href="#so-what-will-we-be-doing-today" aria-hidden="true"><span class="icon icon-link"></span></a>So what will we be doing today?</h2>
+<p>We'll be taking a brand new .NET Core Web API project and deploying it as a single AWS Lambda. If one were to do this manually, it would not only require the setting up of AWS assets such as an S3 bucket &#x26; API gateway on top of the lambdas we create but it would also be a tiresome and very manual process.</p>
+<p>By the end of this post, you should have a deployed version of your .NET Core Web API that is triggered as a single AWS Lambda function with an API gateway that proxies requests through to all the routes you have defined within your controllers. The Serverless Framework will also handle an S3 bucket for your deployed assets to be uploaded in to.</p>
+<p><img src="https://media.giphy.com/media/QLvRBqfLXCphu/giphy.gif" alt="Let&#x27;s begin!"></p>
+<h2 id="prerequisites"><a href="#prerequisites" aria-hidden="true"><span class="icon icon-link"></span></a>Prerequisites</h2>
+<ul>
+<li>An <a href="https://aws.amazon.com" target="_blank" rel="nofollow noopener noreferrer">AWS</a> account.</li>
+<li>The <a href="https://serverless.com" target="_blank" rel="nofollow noopener noreferrer">Serverless Framework CLI</a> installed on your machine via <a href="https://www.npmjs.com/get-npm" target="_blank" rel="nofollow noopener noreferrer">NPM</a>.</li>
+<li><a href="https://www.youtube.com/watch?v=KngM5bfpttA" target="_blank" rel="nofollow noopener noreferrer">Your AWS account configured with your Serverless Framework CLI.</a></li>
+<li>An ASP.NET Core Web API to deploy.</li>
+</ul>
+<h2 id="dont-have-a-net-core-web-api-to-deploy"><a href="#dont-have-a-net-core-web-api-to-deploy" aria-hidden="true"><span class="icon icon-link"></span></a>Don't have a .NET Core Web API to deploy?</h2>
+<pre class="language-bash"><code class="language-bash"><span class="token function">mkdir</span> YourNewDirectory
+<span class="token builtin class-name">cd</span> YourNewDirectory
+dotnet new webapi
+dotnet restore</code></pre>
+<h2 id="integrating-the-serverless-framework"><a href="#integrating-the-serverless-framework" aria-hidden="true"><span class="icon icon-link"></span></a>Integrating the Serverless Framework</h2>
+<p>The way the Serverless Framework knows how to handle your deployment process is through utilising a YAML configuration file called <code class="language-text">serverless.yml</code> in the root directory of your project. Create this file and add the contents as shown below. Obviously, anywhere I refer to <code class="language-text">blog-tutorial-serverless</code> will differ depending on how you have named your project. If you have used hyphens, these become underscores in your project if you maintain the same name as a namespace within your code.</p>
+<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">service</span><span class="token punctuation">:</span> blog<span class="token punctuation">-</span>tutorial<span class="token punctuation">-</span>serverless
+
+<span class="token key atrule">provider</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> aws
+  <span class="token key atrule">runtime</span><span class="token punctuation">:</span> dotnetcore2.1
+  <span class="token key atrule">stage</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>opt<span class="token punctuation">:</span>stage<span class="token punctuation">,</span> <span class="token string">'dev'</span><span class="token punctuation">}</span>
+  <span class="token key atrule">region</span><span class="token punctuation">:</span> eu<span class="token punctuation">-</span>west<span class="token punctuation">-</span><span class="token number">1</span>
+  <span class="token key atrule">profile</span><span class="token punctuation">:</span> default
+
+<span class="token key atrule">package</span><span class="token punctuation">:</span>
+  <span class="token key atrule">artifact</span><span class="token punctuation">:</span> bin/release/netcoreapp2.1/blog<span class="token punctuation">-</span>tutorial<span class="token punctuation">-</span>serverless.zip
+
+<span class="token key atrule">functions</span><span class="token punctuation">:</span>
+  <span class="token key atrule">api</span><span class="token punctuation">:</span>
+    <span class="token key atrule">handler</span><span class="token punctuation">:</span> blog<span class="token punctuation">-</span>tutorial<span class="token punctuation">-</span>serverless<span class="token punctuation">:</span><span class="token punctuation">:</span>blog_tutorial_serverless.LambdaEntryPoint<span class="token punctuation">:</span><span class="token punctuation">:</span>FunctionHandlerAsync
+    <span class="token key atrule">events</span><span class="token punctuation">:</span>
+     <span class="token punctuation">-</span> <span class="token key atrule">http</span><span class="token punctuation">:</span>
+         <span class="token key atrule">path</span><span class="token punctuation">:</span> /<span class="token punctuation">{</span>proxy+<span class="token punctuation">}</span>
+         <span class="token key atrule">method</span><span class="token punctuation">:</span> ANY
+
+<span class="token key atrule">custom</span><span class="token punctuation">:</span>
+  <span class="token key atrule">stage</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>opt<span class="token punctuation">:</span>stage<span class="token punctuation">,</span> self<span class="token punctuation">:</span>provider.stage<span class="token punctuation">}</span></code></pre>
+<p>If you want to learn more about more magic you can place in your Serverless.yml configuration file, visit <a href="https://serverless.com/framework/docs/" target="_blank" rel="nofollow noopener noreferrer">here</a>.</p>
+<p>In this case, I've named my service after my Web API project name. I've also made sure my function handler follows the required format of <code class="language-text">AssemblyName::Namespace.ClassName::FunctionHandlerAsync</code>.</p>
+<p>I've specified that the cloud provider I want Serverless to try and deploy to is AWS and that I want it to try and deploy using my default account to the eu-west-1 region (Ireland). This should make sense if you followed <a href="(https://www.youtube.com/watch?v=KngM5bfpttA)">this</a> video tutorial that I linked to in the prerequisites. The profile option is useful if you have more than one AWS account configured to the AWS CLI on your machine.</p>
+<p>The package section is pointing to where my compiled code that Serverless will be uploading will be.</p>
+<p>An example of what the serverless.yml file would look like if configured for different individual functions rather than to generalise a whole Web API project is like so:</p>
+<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">functions</span><span class="token punctuation">:</span>
+  <span class="token key atrule">hello</span><span class="token punctuation">:</span>
+    <span class="token key atrule">handler</span><span class="token punctuation">:</span> CsharpHandlers<span class="token punctuation">:</span><span class="token punctuation">:</span>AwsDotnetCsharp.Handler<span class="token punctuation">:</span><span class="token punctuation">:</span>Hello
+    <span class="token key atrule">events</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">http</span><span class="token punctuation">:</span>
+          <span class="token key atrule">path</span><span class="token punctuation">:</span> hello
+          <span class="token key atrule">method</span><span class="token punctuation">:</span> post
+  <span class="token key atrule">goodbye</span><span class="token punctuation">:</span>
+    <span class="token key atrule">handler</span><span class="token punctuation">:</span> CsharpHandlers<span class="token punctuation">:</span><span class="token punctuation">:</span>AwsDotnetCsharp.Handler<span class="token punctuation">:</span><span class="token punctuation">:</span>Goodbye
+    <span class="token key atrule">events</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">http</span><span class="token punctuation">:</span>
+          <span class="token key atrule">path</span><span class="token punctuation">:</span> goodbye
+          <span class="token key atrule">method</span><span class="token punctuation">:</span> get</code></pre>
+<p>So, in order to be able to get away with a single function that encapsulates our whole Web API we use the ANY method along with the <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-create-api-as-simple-proxy-for-http.html" target="_blank" rel="nofollow noopener noreferrer">"/{proxy+}"</a> http path which sort of acts as a wildcard path.</p>
+<p>Last but not least, we have the custom section which I have been currently using primarily for environment variables.</p>
+<p><code class="language-text">${opt:xyz}</code> is the syntax used to reference CLI options passed in. So for example, if you were to input:</p>
+<pre class="language-bash"><code class="language-bash">serverless deploy --stage prod</code></pre>
+<p>Serverless will deploy and assign your stage environmental variable on AWS as "prod". You may or may not be then referencing environmental variables in your code.</p>
+<h2 id="tweaking-our-net-core-project"><a href="#tweaking-our-net-core-project" aria-hidden="true"><span class="icon icon-link"></span></a>Tweaking our .NET Core project</h2>
+<p>Our function in this case is pointing to a class in the root of your project, called <code class="language-text">LambdaEntryPoint</code>.</p>
+<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">functions</span><span class="token punctuation">:</span>
+  <span class="token key atrule">api</span><span class="token punctuation">:</span>
+    <span class="token key atrule">handler</span><span class="token punctuation">:</span> blog<span class="token punctuation">-</span>tutorial<span class="token punctuation">-</span>serverless<span class="token punctuation">:</span><span class="token punctuation">:</span>blog_tutorial_serverless.LambdaEntryPoint<span class="token punctuation">:</span><span class="token punctuation">:</span>FunctionHandlerAsync
+    <span class="token key atrule">events</span><span class="token punctuation">:</span>
+     <span class="token punctuation">-</span> <span class="token key atrule">http</span><span class="token punctuation">:</span>
+         <span class="token key atrule">path</span><span class="token punctuation">:</span> /<span class="token punctuation">{</span>proxy+<span class="token punctuation">}</span>
+         <span class="token key atrule">method</span><span class="token punctuation">:</span> ANY
+
+<span class="token key atrule">custom</span><span class="token punctuation">:</span>
+  <span class="token key atrule">stage</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>opt<span class="token punctuation">:</span>stage<span class="token punctuation">,</span> self<span class="token punctuation">:</span>provider.stage<span class="token punctuation">}</span></code></pre>
+<p>So, as you may have guessed. You need to create this class.</p>
+<pre class="language-csharp"><code class="language-csharp"><span class="token keyword">using</span> <span class="token namespace">System</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Collections<span class="token punctuation">.</span>Generic</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Linq</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Net</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Threading<span class="token punctuation">.</span>Tasks</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">Microsoft<span class="token punctuation">.</span>AspNetCore<span class="token punctuation">.</span>Hosting</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>IO</span><span class="token punctuation">;</span>
+
+<span class="token keyword">namespace</span> <span class="token namespace">blog_tutorial_serverless</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">LambdaEntryPoint</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Amazon<span class="token punctuation">.</span>Lambda<span class="token punctuation">.</span>AspNetCoreServer<span class="token punctuation">.</span>APIGatewayProxyFunction</span></span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">protected</span> <span class="token keyword">override</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Init</span><span class="token punctuation">(</span><span class="token class-name">IWebHostBuilder</span> builder<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            builder
+                <span class="token punctuation">.</span><span class="token generic-method"><span class="token function">UseStartup</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>Startup<span class="token punctuation">></span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>And as you may have spotted, we are inheriting from a third party class. So for that reason, we need to add the following dependencies.</p>
+<pre class="language-bash"><code class="language-bash">dotnet <span class="token function">add</span> package Amazon.Lambda.Core
+dotnet <span class="token function">add</span> package Amazon.Lambda.Serialization.Json
+dotnet <span class="token function">add</span> package Amazon.Lambda.AspNetCoreServer</code></pre>
+<p>If you open your project's .csproj file, you will also find the default <code class="language-text">Microsoft.AspNetCore.App</code> package reference. Since AWS Lambda is only compatible up to .NET Core 2.1, we must hard code this package's version reference. Ignore any Visual Studio warnings that it is advised to not hard code a version number for this package. If you have any other references to <code class="language-text">2.2.0</code> such as <code class="language-text">Microsoft.AspNetCore.Razor.Design</code>, set them to <code class="language-text">2.1.0</code> too.</p>
+<p>The reason why we're limited to .NET Core 2.1 is because Amazon said they'll only support LTS releases. So in theory, the next version we will be gifted with within the Lambda world will be .NET Core 3.1 which should appear in and around November 2019.</p>
+<pre class="language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>PackageReference</span> <span class="token attr-name">Include</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Microsoft.AspNetCore.App<span class="token punctuation">"</span></span> <span class="token attr-name">Version</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>2.1.0<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></code></pre>
+<p>You may also have to modify your <code class="language-text">ConfigureServices(IServiceCollection services)</code> method in your <code class="language-text">Startup.cs</code> to specify <code class="language-text">CompatibilityVersion.Version_2_1</code>.</p>
+<p>Make sure to also remove the line within your <code class="language-text">.csproj</code> that says <code class="language-text">&lt;AspNetCoreHostingModel&gt;InProcess&lt;/AspNetCoreHostingModel&gt;</code>, otherwise you will get an error later on.</p>
+<p>We also need to install a tool to the dotnet CLI that allows us to deploy AWS Lambda functions.</p>
+<pre class="language-bash"><code class="language-bash">dotnet tool <span class="token function">install</span> --global Amazon.Lambda.Tools</code></pre>
+<h2 id="building-our-net-core-project"><a href="#building-our-net-core-project" aria-hidden="true"><span class="icon icon-link"></span></a>Building our .NET Core project</h2>
+<p>Earlier we touched on the specification of a package artifact within our <code class="language-text">serverless.yml</code> file and said it was what would be uploaded to an S3 bucket and deployed as our lambda.</p>
+<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">package</span><span class="token punctuation">:</span>
+  <span class="token key atrule">artifact</span><span class="token punctuation">:</span> bin/release/netcoreapp2.1/blog<span class="token punctuation">-</span>tutorial<span class="token punctuation">-</span>serverless.zip</code></pre>
+<p>Usually when you want to build, publish and deploy, you will run <code class="language-text">dotnet publish</code> with some flags and that will create some artifacts for you to deploy. In this case, we need to create a "lambda package" out of our artifacts.</p>
+<p>This can be done for us using the Amazon Lambda Tools plugin for the dotnet CLI that we installed earlier by running the following command:</p>
+<pre class="language-bash"><code class="language-bash">dotnet lambda package --configuration release --framework netcoreapp2.1 --output-package bin/release/netcoreapp2.1/blog-tutorial-serverless.zip</code></pre>
+<p>Note how we have once again hard coded .NET Core 2.1 along with ensuring that our <code class="language-text">--output-package</code> flag is pointing to the same directory we specified in our <code class="language-text">serverless.yml</code> earlier.</p>
+<p>It might be a useful idea to place the above bash command in a batch file (e.g. <code class="language-text">./build.cmd</code>) you can easily execute so that you can always generate a fresh build with that configuration prior to deployment going forwards. Because deploying with the serverless framework is such a breeze, I sometimes end up deploying without realising I haven't run the above command to generate a new output package with my changes to actually be deployed.</p>
+<p>If you've done everything correctly, your output should look something like this:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token punctuation">..</span>.
+<span class="token punctuation">..</span>.
+<span class="token punctuation">..</span>. zipping: Amazon.Lambda.APIGatewayEvents.dll
+<span class="token punctuation">..</span>. zipping: Amazon.Lambda.ApplicationLoadBalancerEvents.dll
+<span class="token punctuation">..</span>. zipping: Amazon.Lambda.AspNetCoreServer.dll
+<span class="token punctuation">..</span>. zipping: Amazon.Lambda.Core.dll
+<span class="token punctuation">..</span>. zipping: Amazon.Lambda.Logging.AspNetCore.dll
+<span class="token punctuation">..</span>. zipping: Amazon.Lambda.Serialization.Json.dll
+<span class="token punctuation">..</span>. zipping: appsettings.Development.json
+<span class="token punctuation">..</span>. zipping: appsettings.json
+<span class="token punctuation">..</span>. zipping: blog-tutorial-serverless
+<span class="token punctuation">..</span>. zipping: blog-tutorial-serverless.deps.json
+<span class="token punctuation">..</span>. zipping: blog-tutorial-serverless.dll
+<span class="token punctuation">..</span>. zipping: blog-tutorial-serverless.pdb
+<span class="token punctuation">..</span>. zipping: blog-tutorial-serverless.runtimeconfig.json
+<span class="token punctuation">..</span>. zipping: web.config
+Lambda project successfully packaged: C:<span class="token punctuation">\</span>code<span class="token punctuation">\</span>serverless<span class="token punctuation">\</span>blog-tutorial-serverless<span class="token punctuation">\</span>bin<span class="token punctuation">\</span>release<span class="token punctuation">\</span>netcoreapp2.1<span class="token punctuation">\</span>blog-tutorial-serverless.zip</code></pre>
+<h2 id="deploy"><a href="#deploy" aria-hidden="true"><span class="icon icon-link"></span></a>DEPLOY!</h2>
+<p>Prepare yourselves...</p>
+<pre class="language-bash"><code class="language-bash">serverless deploy -v</code></pre>
+<p>The <code class="language-text">-v</code> flag here stands for <code class="language-text">--verbose</code>. I like it when the CLI tells me more about what it's doing during deployment and gives me feedback. The Serverless Framework CLI reference can be found <a href="https://serverless.com/framework/docs/providers/aws/cli-reference/deploy/" target="_blank" rel="nofollow noopener noreferrer">here</a>.</p>
+<p>You will see cool things being output such as the below, which emphasizes how much heavy lifting the Serverless Framework has removed for you.</p>
+<pre class="language-bash"><code class="language-bash">CloudFormation - CREATE_IN_PROGRESS - AWS::CloudFormation::Stack - blog-tutorial-serverless-dev
+CloudFormation - CREATE_IN_PROGRESS - AWS::S3::Bucket - ServerlessDeploymentBucket
+CloudFormation - CREATE_IN_PROGRESS - AWS::ApiGateway::RestApi - ApiGatewayRestApi
+CloudFormation - CREATE_IN_PROGRESS - AWS::Logs::LogGroup - ApiLogGroup
+CloudFormation - CREATE_IN_PROGRESS - AWS::IAM::Role - IamRoleLambdaExecution</code></pre>
+<p>Once deployment is complete, you should have a AWS hosted URL returned. You can use that URL to access your API. Simply append to it, whatever you've specified in your project as your API endpoint routes and it should be functioning as expected.</p>
+<pre class="language-bash"><code class="language-bash">Serverless: Stack update finished<span class="token punctuation">..</span>.
+Service Information
+service: blog-tutorial-serverless
+stage: dev
+region: eu-west-1
+stack: blog-tutorial-serverless-dev
+resources: <span class="token number">10</span>
+api keys:
+  None
+endpoints:
+  ANY - https://trololo.execute-api.eu-west-1.amazonaws.com/dev/<span class="token punctuation">{</span>proxy+<span class="token punctuation">}</span>
+functions:
+  api: blog-tutorial-serverless-dev-api
+layers:
+  None</code></pre>
+<p>Now, if I take the URL and try and hit both <code class="language-text">GET</code> endpoints that we have in our default <code class="language-text">ValuesController</code> that we get with <code class="language-text">dotnet new webapi</code>:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">curl</span> -XGET <span class="token string">'https://trololo.execute-api.eu-west-1.amazonaws.com/dev/api/values'</span>
+<span class="token punctuation">[</span><span class="token string">"value1"</span>,<span class="token string">"value2"</span><span class="token punctuation">]</span></code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token function">curl</span> -XGET <span class="token string">'https://trololo.execute-api.eu-west-1.amazonaws.com/dev/api/values/1'</span>
+value</code></pre>
+<p>Boom!</p>
+<h2 id="awesome-how-does-this-now-affect-costs"><a href="#awesome-how-does-this-now-affect-costs" aria-hidden="true"><span class="icon icon-link"></span></a>Awesome. How does this now affect costs?</h2>
+<p>As with all AWS Lambda's, you only pay for what is used. You get your first 1 million requests completely FREE... and then $0.20 for every 1 million requests thereafter.</p>
+<p>Requests can also translate in to compute time per month (400,000 GB-seconds), so whichever is hit first becomes your free threshold. You can read about AWS Lambda pricing in more detail <a href="https://aws.amazon.com/lambda/pricing/" target="_blank" rel="nofollow noopener noreferrer">here</a>.</p>
+<p>The previously discussed method of defining a bunch of smaller, separated functions versus encapsulating a whole API within a single function, means you create an AWS lambda function for every HTTP endpoint you define. Meanwhile when going down the API encapsulation method as followed within this post, you are instead creating a single AWS lambda function.</p>
+<p>Logic therefore dictates that since all endpoint requests are then coming from your API Gateway to a single lambda rather than spread out over numerous lambdas, that you are therefore more likely to hit your free threshold sooner.</p>
+<h2 id="conclusion"><a href="#conclusion" aria-hidden="true"><span class="icon icon-link"></span></a>Conclusion</h2>
+<p>I hope this article helps a lot of people who ran in to the same brick wall as me. I loved the idea of serverless hosting, understood the concepts but struggled to understand how it could be integrated in to this type of scenario encapsulating a fully blown API within an individual project such as what you should have created by the end of this post.</p>
+<p>If I've gone wrong anywhere in this article, feel free to get in touch either in the comments below or on twitter.</p>
+<p>If all this deployment lark interests you, I also wrote a tutorial on <a href="http://www.karam.io/2018/Deploying-a-NET-Core-application-to-a-5-digitalocean-droplet-using-dokku/" target="_blank" rel="nofollow noopener noreferrer">Deploying a .NET Core Application to a $5 DigitalOcean droplet using Dokku</a> that even reached the top page of <a href="http://reddit.com/r/dotnet" target="_blank" rel="nofollow noopener noreferrer">/r/dotnet</a> a while back.</p>
+<p>Bye! 👋</p>
+</div><div class="post__footer"><div class="post-tags"><a href="/blog/tag/AWS/" class="post-tags__link"><span>#</span> AWS
+  </a><a href="/blog/tag/.NET%20Core/" class="post-tags__link"><span>#</span> .NET Core
+  </a></div></div></div><div><div class="coffee__container"><h4>Enjoyed this blog post? 😄</h4><a href="https://www.buymeacoffee.com/karam" target="_blank"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee :)&emoji=&slug=karam&button_colour=FFDD00&font_colour=000000&font_family=Comic&outline_colour=000000&coffee_colour=ffffff"></a></div></div><div class="post-comments"><div class="content-box__comments"><div id="disqus_thread" identifier="Creating &amp; deploying a .NET Core Web API to AWS with the Serverless Framework." style="min-height:200px;"></div></div></div></main><footer class="footer"><span>Made with
+      <span style="color: red"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-heart fa-w-16"><path fill="currentColor" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path></svg></span>
+      in wet &amp; rainy
+      <a href="//en.wikipedia.org/wiki/Lancashire" target="_blank">Lancashire</a>!</span><br><span>© Copyright 2021 -
+      <a href="//karam.io">Karam.io</a></span></footer></div>
+    <script src="/assets/js/app.24c85096.js" defer></script><script src="/assets/js/page--src--templates--post-vue.4ba5e1d2.js" defer></script>
+  </body>
+</html>
