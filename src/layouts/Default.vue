@@ -34,7 +34,7 @@
       ><br />
       <span
         >© Copyright {{ new Date().getFullYear() }} -
-        <a href="//gridsome.org">Karam.io</a></span
+        <a href="//karam.io">Karam.io</a></span
       >
     </footer>
   </div>

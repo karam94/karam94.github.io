@@ -2,7 +2,7 @@
 title: "Five Minute Design Patterns #2: The Factory Pattern"
 date: 2020-12-05
 published: true
-tags: ["Design Patterns", "C#", "Advent Design Patterns"]
+tags: ["Design Patterns", "C#", "Five Minute Design Patterns"]
 series: false
 cover_image: ./images/patrick-hendry-6xeDIZgoPaw-unsplash.jpg
 cover_image_credits: "<a href='https://unsplash.com/@worldsbetweenlines'>Patrick Hendry</a>"
