@@ -14,6 +14,7 @@
       <vue-typed-js
         :strings="stringsToType"
         :type-speed="100"
+        :back-speed="50"
         :back-delay="1500"
         :loop="true"
       >
@@ -45,7 +46,7 @@ export default {
     return {
       stringsToType: [
         "Hi, I'm Karam!",
-        "I <span style='color:red;'>♥</span> .NET Core, Vue.js &amp; lots more!",
+        "I <span style='color:red;'>♥</span> .NET, Vue.js, Next.js &amp; lots more!",
         "Welcome to my blog!",
       ],
     };
