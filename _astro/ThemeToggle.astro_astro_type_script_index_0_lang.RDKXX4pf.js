@@ -1,0 +1,1 @@
+import{t as o}from"./theme.BTxhk33v.js";function t(e){e.stopImmediatePropagation(),o()}function n(){const e=document.getElementById("theme-toggle");e&&(e.removeEventListener("click",t),e.addEventListener("click",t))}n();document.addEventListener("astro:after-swap",n);

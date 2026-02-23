@@ -1,0 +1,24 @@
+{
+  "name": "Karam Kabbara",
+  "short_name": "Karam",
+  "description": "Personal blog about web development, design, and technology",
+  "start_url": "/",
+  "display": "minimal-ui",
+  "background_color": "#360033",
+  "theme_color": "#360033",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
