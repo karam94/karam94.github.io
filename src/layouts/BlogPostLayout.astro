@@ -341,6 +341,16 @@ const type = 'article';
     background: var(--color-card-bg);
     font-weight: 600;
   }
+
+  @media (max-width: 640px) {
+    .prose :global(img) {
+      padding: 0 1rem;
+    }
+
+    .prose :global(pre) {
+      font-size: 0.75em;
+    }
+  }
 </style>
 
 <script>
