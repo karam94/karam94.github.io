@@ -1,0 +1,25 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="page">
+    <div class="container">
+      <slot />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page {
+    padding: 3rem 0;
+    min-height: calc(100vh - 300px);
+  }
+</style>

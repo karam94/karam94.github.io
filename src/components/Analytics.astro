@@ -1,0 +1,81 @@
+---
+/**
+ * Analytics Component
+ *
+ * Privacy-friendly analytics integration.
+ * Configure your analytics provider below.
+ *
+ * Options:
+ * - Plausible: Uncomment and set your domain
+ * - Umami: Uncomment and set your website ID
+ * - Fathom: Uncomment and set your site ID
+ */
+
+// Configure your analytics provider here
+const PLAUSIBLE_DOMAIN = 'www.karam.io'; // Update with your domain
+const UMAMI_WEBSITE_ID = ''; // Update with your Umami website ID
+const FATHOM_SITE_ID = ''; // Update with your Fathom site ID
+
+const isPlausibleConfigured = PLAUSIBLE_DOMAIN && PLAUSIBLE_DOMAIN !== 'www.karam.io';
+const isUmamiConfigured = UMAMI_WEBSITE_ID && UMAMI_WEBSITE_ID.length > 0;
+const isFathomConfigured = FATHOM_SITE_ID && FATHOM_SITE_ID.length > 0;
+---
+
+{/* Plausible Analytics */}
+{isPlausibleConfigured && (
+  <script
+    is:inline
+    defer
+    data-domain={PLAUSIBLE_DOMAIN}
+    src="https://plausible.io/js/script.js"
+  ></script>
+)}
+
+{/* Umami Analytics */}
+{isUmamiConfigured && (
+  <script
+    is:inline
+    defer
+    data-website-id={UMAMI_WEBSITE_ID}
+    src="https://analytics.umami.is/script.js"
+  ></script>
+)}
+
+{/* Fathom Analytics */}
+{isFathomConfigured && (
+  <script
+    is:inline
+    defer
+    src={`https://cdn.usefathom.com/script.js`}
+    data-site={FATHOM_SITE_ID}
+  ></script>
+)}
+
+{/* Core Web Vitals Tracking (Optional) */}
+<script is:inline>
+  // Track Core Web Vitals
+  // Uncomment below to enable CWV tracking to your analytics
+  /*
+  (function() {
+    if ('PerformanceObserver' in window) {
+      const observer = new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) {
+          if (entry.entryType === 'layout-shift' && !entry.hadRecentInput) {
+            console.log('CLS:', entry.value);
+            // Send to your analytics
+          }
+          if (entry.entryType === 'largest-contentful-paint') {
+            console.log('LCP:', entry.startTime);
+            // Send to your analytics
+          }
+          if (entry.entryType === 'first-input') {
+            console.log('FID:', entry.processingStart - entry.startTime);
+            // Send to your analytics
+          }
+        }
+      });
+      observer.observe({ entryTypes: ['layout-shift', 'largest-contentful-paint', 'first-input'] });
+    }
+  })();
+  */
+</script>

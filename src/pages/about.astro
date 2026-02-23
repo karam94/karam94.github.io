@@ -1,0 +1,123 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout title="About" description="Learn more about me">
+  <div class="about-page">
+    <h1 class="gradient-text">About Me</h1>
+
+    <div class="about-content">
+      <div class="about-text">
+        <p>
+          Hi! I'm Karam, a developer passionate about building
+          beautiful and functional web experiences.
+        </p>
+
+        <p>
+          I specialize in modern web technologies and love exploring
+          new frameworks and design patterns. This blog is where I share
+          my learnings, experiments, and thoughts on software development.
+        </p>
+
+        <h2>Skills</h2>
+        <ul class="skills-list">
+          <li>JavaScript / TypeScript</li>
+          <li>React / Astro / Vue</li>
+          <li>Node.js</li>
+          <li>CSS / Tailwind</li>
+          <li>Web Performance</li>
+          <li>UI/UX Design</li>
+        </ul>
+
+        <h2>Connect</h2>
+        <div class="social-links">
+          <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer">Twitter</a>
+          <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</PageLayout>
+
+<style>
+  .about-page {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .about-content {
+    margin-top: 3rem;
+  }
+
+  .about-text p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    font-size: 1.125rem;
+  }
+
+  .about-text h2 {
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .skills-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    padding: 0;
+  }
+
+  .skills-list li {
+    padding: 0.75rem 1rem;
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    text-align: center;
+    transition: all var(--transition-fast);
+  }
+
+  .skills-list li:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  [data-theme='dark'] .skills-list li:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .social-links a {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--color-accent);
+    border-radius: 8px;
+    transition: all var(--transition-fast);
+    text-decoration: none;
+    color: var(--color-text);
+  }
+
+  .social-links a:hover {
+    background: var(--color-accent);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(101, 163, 13, 0.25);
+  }
+
+  @media (max-width: 768px) {
+    .about-text p {
+      font-size: 1rem;
+    }
+
+    .skills-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const paths = [];
+
+  // Generate redirects for old URL patterns
+  for (const post of posts) {
+    const filename = post.id.split('/').pop() || post.id;
+    const cleanSlug = filename.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, '');
+
+    // Old pattern: /blog/YYYY/YYYY-MM-DD-title
+    const yearMatch = post.id.match(/^(\d{4})\//);
+    if (yearMatch) {
+      const year = yearMatch[1];
+      const datePrefix = filename.match(/^\d{4}-\d{2}-\d{2}-/)?.[0] || '';
+      const titleWithoutDate = filename.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, '');
+
+      // Add old pattern path
+      paths.push({
+        params: { path: `${year}/${datePrefix}${titleWithoutDate}` },
+        props: { redirectSlug: cleanSlug }
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { redirectSlug } = Astro.props;
+
+// Redirect to the new URL
+return Astro.redirect(`/blog/${redirectSlug}`, 301);
+---

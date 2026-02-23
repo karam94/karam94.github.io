@@ -1,0 +1,76 @@
+---
+/**
+ * OptimizedImage Component
+ *
+ * Image optimization wrapper using Astro's Image component.
+ * Supports WebP/AVIF format conversion, responsive srcsets,
+ * and proper aspect ratio for CLS prevention.
+ */
+
+import { Image, type ImageMetadata } from 'astro:assets';
+
+interface Props {
+  src: string | ImageMetadata | import('astro:assets').ImageProps['src'];
+  alt: string;
+  width?: number;
+  height?: number;
+  sizes?: string;
+  loading?: 'eager' | 'lazy';
+  priority?: boolean;
+  format?: 'webp' | 'avif' | 'png' | 'jpg';
+  quality?: number;
+  class?: string;
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70ch',
+  loading = 'lazy',
+  priority = false,
+  format = 'webp',
+  quality = 90,
+  class: className = '',
+} = Astro.props;
+
+// For hero images, use eager loading and sync decoding
+const finalLoading = priority ? 'eager' : loading;
+const decoding = priority ? 'sync' : 'async';
+---
+
+<!-- Picture element for progressive enhancement with WebP/AVIF fallback -->
+<picture class={className}>
+  <source
+    srcset={typeof src === 'string' ? src : src.src}
+    type="image/avif"
+  />
+  <source
+    srcset={typeof src === 'string' ? src : src.src}
+    type="image/webp"
+  />
+  <Image
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    sizes={sizes}
+    loading={finalLoading}
+    decoding={decoding}
+    format={format}
+    quality={quality}
+  />
+</picture>
+
+<style>
+  picture {
+    display: contents;
+  }
+
+  :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>

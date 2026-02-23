@@ -1,0 +1,111 @@
+---
+/**
+ * Scroll to Top Button Component
+ * Appears after scrolling down, smooth scrolls back to top
+ */
+---
+
+<button
+  id="scroll-to-top"
+  class="scroll-to-top"
+  aria-label="Scroll to top"
+  type="button"
+>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M6 15l6-6 6 6"/>
+  </svg>
+</button>
+
+<style>
+  .scroll-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    color: var(--color-text);
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all var(--transition-medium);
+    z-index: 99;
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  }
+
+  .scroll-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scroll-to-top:hover {
+    background: var(--color-accent);
+    color: var(--color-bg);
+    border-color: var(--color-accent);
+    box-shadow:
+      0 6px 16px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+  }
+
+  .scroll-to-top:active {
+    transform: scale(0.95);
+  }
+
+  @media (max-width: 640px) {
+    .scroll-to-top {
+      bottom: max(1.5rem, env(safe-area-inset-bottom, 1.5rem));
+      right: 1.5rem;
+      width: 44px;
+      height: 44px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-to-top {
+      transition: opacity var(--transition-fast);
+    }
+  }
+</style>
+
+<script>
+  function init() {
+    const scrollButton = document.getElementById('scroll-to-top') as HTMLButtonElement | null;
+    if (!scrollButton) return;
+
+    const scrollThreshold = 300;
+
+    function updateVisibility() {
+      if (window.scrollY > scrollThreshold) {
+        scrollButton!.classList.add('visible');
+      } else {
+        scrollButton!.classList.remove('visible');
+      }
+    }
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateVisibility();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    scrollButton.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    updateVisibility();
+  }
+
+  document.addEventListener('astro:page-load', init);
+</script>

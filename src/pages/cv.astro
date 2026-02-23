@@ -1,0 +1,186 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+const experience = [
+  {
+    title: 'Senior Developer',
+    company: 'Tech Company',
+    period: '2022 - Present',
+    description: 'Led development of modern web applications using React, TypeScript, and Node.js. Improved performance and user experience across multiple projects.',
+  },
+  {
+    title: 'Full Stack Developer',
+    company: 'Digital Agency',
+    period: '2020 - 2022',
+    description: 'Built responsive websites and web applications for various clients. Worked with modern frameworks and tools.',
+  },
+];
+
+const education = [
+  {
+    degree: 'B.S. Computer Science',
+    school: 'University Name',
+    year: '2020',
+  },
+];
+---
+
+<PageLayout title="CV" description="My curriculum vitae">
+  <div class="cv-page">
+    <header class="cv-header">
+      <h1 class="gradient-text">Curriculum Vitae</h1>
+      <button class="download-btn" onclick="window.print()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Download PDF
+      </button>
+    </header>
+
+    <section class="cv-section">
+      <h2>Experience</h2>
+      <div class="timeline">
+        {experience.map((job) => (
+          <div class="timeline-item">
+            <h3>{job.title}</h3>
+            <div class="timeline-meta">
+              <span class="company">{job.company}</span>
+              <span class="period">{job.period}</span>
+            </div>
+            <p>{job.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="cv-section">
+      <h2>Education</h2>
+      <div class="timeline">
+        {education.map((edu) => (
+          <div class="timeline-item">
+            <h3>{edu.degree}</h3>
+            <div class="timeline-meta">
+              <span class="company">{edu.school}</span>
+              <span class="period">{edu.year}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+</PageLayout>
+
+<style>
+  .cv-page {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .cv-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .download-btn {
+    padding: 0.75rem 1.5rem;
+    background: var(--color-accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .download-btn:hover {
+    background: var(--color-accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(101, 163, 13, 0.25);
+  }
+
+  .cv-section {
+    margin-bottom: 3rem;
+  }
+
+  .cv-section h2 {
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .timeline-item {
+    padding-left: 2rem;
+    border-left: 2px solid var(--color-accent);
+    position: relative;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+
+  .timeline-item h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-meta {
+    display: flex;
+    justify-content: space-between;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .company {
+    font-weight: 500;
+  }
+
+  .period {
+    font-family: var(--font-mono);
+  }
+
+  .timeline-item p {
+    line-height: 1.6;
+  }
+
+  @media print {
+    .download-btn {
+      display: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .cv-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .timeline-meta {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+  }
+</style>

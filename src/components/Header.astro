@@ -1,0 +1,184 @@
+---
+import Search from './Search.astro';
+import ThemeToggle from './ThemeToggle.astro';
+
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/about', label: 'About' },
+  { href: '/cv', label: 'CV' },
+];
+
+const currentPath = Astro.url.pathname;
+
+interface Props {
+  hideInitially?: boolean;
+}
+
+const { hideInitially = false } = Astro.props;
+---
+
+<header class:list={['header', { 'hide-initially': hideInitially }]} role="banner">
+  <div class="container header-inner">
+    <a href="/" class="logo" aria-label="Karam Kabbara - Home">
+      Karam Kabbara
+    </a>
+
+    <div class="header-right">
+      <nav class="nav" role="navigation" aria-label="Main navigation">
+        {navItems.map(({ href, label }) => {
+          const isActive = currentPath === href || (href !== '/' && currentPath.startsWith(href));
+          return (
+            <a
+              href={href}
+              class:list={['nav-link', { active: isActive }]}
+              aria-current={isActive ? 'page' : undefined}
+            >
+              {label}
+            </a>
+          );
+        })}
+              <ThemeToggle />
+      </nav>
+    </div>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 100;
+    padding: 0.875rem 0;
+    margin-top: calc(-1 * var(--container-padding));
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+  }
+
+  .header.hide-initially {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  .header.visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 3rem;
+    border-bottom: 1px solid var(--color-border);
+    transition: border-color var(--transition-medium);
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .header.scrolled .header-inner {
+    border-bottom-color: transparent;
+  }
+
+  .logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    color: var(--color-accent);
+    transition: all var(--transition-fast);
+  }
+
+  .logo:hover {
+    opacity: 0.85;
+  }
+
+  .nav {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav-link {
+    position: relative;
+    font-weight: 500;
+    font-size: 0.9375rem;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+    opacity: 0.7;
+    transition: opacity var(--transition-fast), color var(--transition-fast);
+    text-decoration: none;
+  }
+
+  .nav-link:hover {
+    opacity: 1;
+    color: var(--color-accent);
+  }
+
+  .nav-link.active {
+    opacity: 1;
+    color: var(--color-text);
+  }
+
+  @media (max-width: 640px) {
+    .header-inner {
+      gap: 1rem;
+    }
+
+    .header-right {
+      gap: 1rem;
+    }
+
+    .nav {
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+    }
+  }
+</style>
+
+<script>
+  function handleHeaderScroll() {
+    const header = document.querySelector('.header');
+    if (!header) return;
+
+    const scrollThreshold = 100;
+
+    if (window.scrollY > scrollThreshold) {
+      header.classList.add('scrolled');
+      // Show header if it was initially hidden
+      if (header.classList.contains('hide-initially')) {
+        header.classList.add('visible');
+      }
+    } else {
+      header.classList.remove('scrolled');
+      // Hide header again if we're at the top and it was initially hidden
+      if (header.classList.contains('hide-initially')) {
+        header.classList.remove('visible');
+      }
+    }
+  }
+
+  // Throttle for performance
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        handleHeaderScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // Initial check
+  handleHeaderScroll();
+</script>

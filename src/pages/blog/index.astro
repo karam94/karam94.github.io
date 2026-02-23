@@ -1,0 +1,260 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+import { getSlug } from '../../utils/getSlug';
+import { getReadingTime } from '../../utils/getReadingTime';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+
+// Calculate reading time for each post from raw markdown body
+const postsWithReadingTime = allPosts.map((post) => {
+  const readingTime = post.data.readingTime || getReadingTime(post.body);
+  return {
+    ...post,
+    data: {
+      ...post.data,
+      readingTime,
+    },
+  };
+});
+
+const sortedPosts = postsWithReadingTime.sort((a, b) =>
+  b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+// Extract all unique categories
+const allCategories = [...new Set(allPosts.flatMap((post) => post.data.category))].sort();
+---
+
+<BaseLayout title="Blog" description="All blog posts">
+  <div class="blog-page">
+    <div class="container">
+      <header class="blog-header">
+        <h1>Writing</h1>
+        <p class="blog-subtitle">
+          Essays on software, design, and building better digital experiences
+        </p>
+      </header>
+
+      {allCategories.length > 0 && (
+        <div class="category-filter">
+          <button class="category-button active" data-category="all">All</button>
+          {allCategories.map((category) => (
+            <button class="category-button" data-category={category}>
+              {category}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {sortedPosts.length > 0 ? (
+        <div class="post-list" id="post-list">
+          {sortedPosts.map((post, index) => (
+            <article class="post-item post-card" data-category={post.data.category} style={`animation-delay: ${index * 100}ms`}>
+              <a href={`/blog/${getSlug(post.id)}`} class="post-link">
+                <h3 class="post-title">{post.data.title}</h3>
+              </a>
+              <p class="post-description">{post.data.description}</p>
+              <div class="post-meta">
+                <time datetime={post.data.pubDate.toISOString()}>
+                  {new Intl.DateTimeFormat('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  }).format(post.data.pubDate)}
+                </time>
+                <span class="separator">•</span>
+                <span class="post-category">{post.data.category}</span>
+                <span class="separator">•</span>
+                <span>{post.data.readingTime} min read</span>
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div class="no-posts">
+          <p>No blog posts yet. Check back soon!</p>
+        </div>
+      )}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .blog-page {
+    padding: 3rem 0 0;
+  }
+
+  .blog-header {
+    text-align: left;
+    margin-bottom: 4rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 2px solid var(--color-border);
+    position: relative;
+  }
+
+  .blog-header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 120px;
+    height: 2px;
+    background: var(--color-accent);
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+
+  .blog-subtitle {
+    font-size: 1.1875rem;
+    color: var(--color-text-muted);
+    max-width: 640px;
+    line-height: 1.7;
+    letter-spacing: -0.01em;
+  }
+
+  .category-filter {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  .category-button {
+    padding: 0.5rem 1.125rem;
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-text);
+    border-radius: 0;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    cursor: pointer;
+    transition: all var(--transition-medium);
+    font-family: var(--font-mono);
+  }
+
+  .category-button:hover {
+    background: var(--color-accent);
+    color: var(--color-bg);
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  .category-button.active {
+    background: var(--color-accent);
+    color: var(--color-bg);
+    border-color: var(--color-accent);
+  }
+
+  .post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .post-item {
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+    transition: all var(--transition-medium);
+  }
+
+  .post-item:last-child {
+    border-bottom: none;
+  }
+
+  .post-item:hover {
+    padding-left: 1.5rem;
+    border-left: 3px solid var(--color-accent);
+  }
+
+  .post-link {
+    text-decoration: none;
+  }
+
+  .post-link::after {
+    content: none;
+  }
+
+  .post-title {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+    transition: color var(--transition-fast);
+  }
+
+  .post-link:hover .post-title {
+    color: var(--color-accent);
+  }
+
+  .post-description {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    max-width: 70ch;
+    color: var(--color-text-muted);
+    letter-spacing: -0.011em;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: var(--color-text-muted);
+  }
+
+  .separator {
+    color: var(--color-text-muted);
+  }
+
+  .post-category {
+    color: var(--color-text-muted);
+  }
+
+  .no-posts {
+    text-align: center;
+    padding: 4rem 0;
+    color: var(--color-text-muted);
+  }
+</style>
+
+<script>
+  // Client-side category filtering
+  const categoryButtons = document.querySelectorAll('.category-button');
+  const postCards = document.querySelectorAll('.post-card');
+
+  categoryButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const selectedCategory = button.getAttribute('data-category');
+
+      // Update active state
+      categoryButtons.forEach((btn) => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      // Filter posts
+      postCards.forEach((card) => {
+        const cardCategory = card.getAttribute('data-category') || '';
+
+        if (selectedCategory === 'all' || cardCategory === selectedCategory) {
+          (card as HTMLElement).style.display = 'block';
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

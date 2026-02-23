@@ -1,0 +1,185 @@
+---
+import Header from '../components/Header.astro';
+import ReadingProgress from '../components/ReadingProgress.astro';
+import Footer from '../components/Footer.astro';
+import SEO from '../components/SEO.astro';
+import SkipLink from '../components/SkipLink.astro';
+import Analytics from '../components/Analytics.astro';
+import ScrollToTop from '../components/ScrollToTop.astro';
+import KeyboardShortcutsModal from '../components/KeyboardShortcutsModal.astro';
+import { ViewTransitions } from 'astro:transitions';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  hideHeaderInitially?: boolean;
+  type?: 'website' | 'article';
+  publishDate?: Date;
+  modifiedDate?: Date;
+  structuredDataType?: 'BlogPosting' | 'BreadcrumbList' | 'Person' | 'WebSite';
+  structuredDataData?: Record<string, any>;
+}
+
+const {
+  title,
+  description,
+  image,
+  hideHeaderInitially = false,
+  type = 'website',
+  publishDate,
+  modifiedDate,
+  structuredDataType,
+  structuredDataData,
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Inline theme init: runs synchronously before CSS to prevent FOUC and fix data-theme on every navigation -->
+    <script is:inline>
+      (function() {
+        const theme = localStorage.getItem('theme')
+          || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+
+    <!-- Critical CSS (inlined for performance) -->
+    <style is:inline define:vars={{ ...Astro.props }}>
+      @import '../styles/critical.css';
+    </style>
+
+    <!-- Favicon variations -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/mask-icon.svg" color="#FFFFFF" />
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#360033" />
+
+    <!-- Resource hints for external domains -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://www.karam.io" />
+    <!-- Add analytics domain here when configured -->
+    <!-- <link rel="preconnect" href="https://plausible.io" crossorigin /> -->
+
+    <!-- Search Console Verification -->
+    <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE" />
+
+    <SEO
+      title={title}
+      description={description}
+      image={image}
+      type={type}
+      publishDate={publishDate}
+      modifiedDate={modifiedDate}
+      structuredDataType={structuredDataType}
+      structuredDataData={structuredDataData}
+    />
+    <ViewTransitions />
+
+    <!-- Fonts -->
+    <!-- Preload for self-hosted fonts (when available) -->
+    <!-- <link rel="preload" href="/fonts/calsans-regular.woff2" as="font" type="font/woff2" crossorigin /> -->
+    <!-- <link rel="preload" href="/fonts/firacode-regular.woff2" as="font" type="font/woff2" crossorigin /> -->
+
+    <!-- Google Fonts (fallback - remove when self-hosting fonts) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+  </head>
+  <body>
+    <Header hideInitially={hideHeaderInitially} />
+    {type === 'article' && <ReadingProgress />}
+
+    <main role="main" transition:animate="fade">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <Analytics />
+
+    <ScrollToTop />
+    <KeyboardShortcutsModal />
+
+    <style is:global>
+      @keyframes fade {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      html {
+        view-transition-name: none;
+      }
+
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation-duration: 0.4s;
+      }
+
+      ::view-transition-old(root) {
+        animation-name: fade-out;
+      }
+
+      ::view-transition-new(root) {
+        animation-name: fade-in;
+      }
+
+      @keyframes fade-out {
+        from {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        to {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+      }
+
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+
+    <script>
+      import { initCursor } from '../scripts/cursor';
+      import { initMagneticButtons } from '../scripts/magnetic';
+      import { initTheme } from '../scripts/theme';
+
+      initTheme();
+      initCursor();
+      initMagneticButtons();
+
+      // Restore data-theme after every View Transitions swap (the is:inline head script
+      // only runs on full page loads; this handles client-side navigation)
+      document.addEventListener('astro:after-swap', () => {
+        const theme = localStorage.getItem('theme')
+          || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      });
+    </script>
+
+  </body>
+</html>

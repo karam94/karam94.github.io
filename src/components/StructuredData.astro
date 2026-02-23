@@ -1,0 +1,94 @@
+---
+/**
+ * StructuredData Component
+ *
+ * Generates JSON-LD structured data for SEO.
+ * Supports BlogPosting, BreadcrumbList, Person, and WebSite schemas.
+ */
+
+interface Props {
+  type: 'BlogPosting' | 'BreadcrumbList' | 'Person' | 'WebSite';
+  data: Record<string, any>;
+}
+
+const { type, data } = Astro.props;
+
+function generateStructuredData() {
+  switch (type) {
+    case 'BlogPosting':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: data.title,
+        description: data.description,
+        image: data.image,
+        datePublished: data.pubDate,
+        dateModified: data.updatedDate || data.pubDate,
+        author: {
+          '@type': 'Person',
+          name: 'Karam Kabbara',
+          url: Astro.site,
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Karam Kabbara',
+          logo: {
+            '@type': 'ImageObject',
+            url: new URL('/favicon.svg', Astro.site).href,
+          },
+        },
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': data.url,
+        },
+      };
+
+    case 'BreadcrumbList':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: data.items.map((item: any, index: number) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: item.name,
+          item: item.url,
+        })),
+      };
+
+    case 'Person':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: 'Karam Kabbara',
+        url: Astro.site,
+        jobTitle: 'Software Engineer',
+        sameAs: [
+          'https://github.com/karam',
+          'https://twitter.com/karam',
+          'https://linkedin.com/in/karam',
+        ],
+      };
+
+    case 'WebSite':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'Karam Kabbara',
+        url: Astro.site,
+        description: 'Personal blog about web development, design, and technology',
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: `${Astro.site}/blog?q={search_term_string}`,
+          'query-input': 'required name=search_term_string',
+        },
+      };
+
+    default:
+      return {};
+  }
+}
+
+const structuredData = generateStructuredData();
+---
+
+<script set:html={JSON.stringify(structuredData)} type="application/ld+json"></script>

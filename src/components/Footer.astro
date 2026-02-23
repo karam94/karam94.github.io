@@ -1,0 +1,118 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer" role="contentinfo">
+  <div class="container footer-inner">
+    <p class="footer-text">
+      Made with
+      <span class="heart-container" aria-label="love">
+        <svg
+          class="heart-icon"
+          width="16"
+          height="16"
+          viewBox="0 0 512 512"
+          aria-hidden="true"
+          focusable="false"
+          role="img"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path fill="#e74c3c" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"/>
+        </svg>
+      </span>
+      in wet & rainy Lancashire!
+    </p>
+    <p class="footer-copyright">
+      © Copyright 2026 - Karam.io
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: 2rem 0 3rem;
+    margin-top: 0;
+  }
+
+  .footer-inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    border-top: 1px solid var(--color-border);
+    padding-top: 2rem;
+  }
+
+  .footer-inner::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-accent-hover) 50%, var(--color-accent) 100%);
+    opacity: 0.8;
+  }
+
+  .footer-text {
+    font-size: 0.875rem;
+    font-family: var(--font-mono);
+    color: var(--color-text);
+    opacity: 0.6;
+    text-align: center;
+    letter-spacing: 0;
+    margin: 0;
+  }
+
+  .footer-text a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: opacity var(--transition-fast);
+    opacity: 1;
+  }
+
+  .footer-text a:hover {
+    opacity: 0.8;
+  }
+
+  .heart-container {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    margin: 0 0.2em;
+  }
+
+  .heart-icon {
+    display: block;
+    animation: glisten 1.5s ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  @keyframes glisten {
+    0%, 100% {
+      transform: scale(1);
+      filter: drop-shadow(0 0 0px rgba(231, 76, 60, 0));
+    }
+    50% {
+      transform: scale(1.15);
+      filter: drop-shadow(0 0 8px rgba(231, 76, 60, 0.6));
+    }
+  }
+
+  .footer-copyright {
+    font-size: 0.875rem;
+    font-family: var(--font-mono);
+    color: var(--color-text);
+    opacity: 0.5;
+    text-align: center;
+    letter-spacing: 0;
+    margin-top: -0.5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .heart-icon {
+      animation: none !important;
+    }
+  }
+</style>

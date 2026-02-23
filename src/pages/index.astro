@@ -1,0 +1,723 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+import { getReadingTime } from '../utils/getReadingTime';
+
+const POSTS_PER_PAGE = 5;
+
+// Helper function to generate clean slugs
+function getCleanSlug(id: string) {
+  const filename = id.split('/').pop() || id;
+  return filename.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, '');
+}
+
+// Get all posts sorted by date
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+
+// Calculate reading time for each post from raw markdown body
+const postsWithReadingTime = allPosts.map((post) => {
+  const readingTime = post.data.readingTime || getReadingTime(post.body);
+  return {
+    ...post,
+    data: {
+      ...post.data,
+      readingTime,
+    },
+  };
+});
+
+const sortedPosts = postsWithReadingTime.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE);
+const postsToShow = sortedPosts.slice(0, POSTS_PER_PAGE);
+---
+
+<BaseLayout
+  title="Karam - Developer & Writer"
+  description="Personal blog about web development, design, and technology"
+  hideHeaderInitially={true}
+>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-name">
+        <span class="name-prefix">Hi, I'm</span>
+        <h1 class="name-main">Karam</h1>
+      </div>
+
+      <div class="hero-content">
+        <p class="hero-bio">
+        I'm currently helping save the <span class="rotating-earth">🌎</span> as a Lead Software Engineer at <a href="https://kraken.tech/" class="highlight-kraken">Kraken</a>. I love leading software engineering teams in solving complex, real-world problems - and when I'm lucky, they even let me <s>speak to claude</s> write some code too.
+        </p>
+
+        <nav class="hero-links">
+          <a href="/blog" class="hero-link">Blog</a>
+          <span class="link-separator">/</span>
+          <a href="/about" class="hero-link">About</a>
+          <span class="link-separator">/</span>
+          <a href="/cv" class="hero-link">CV</a>
+          <span class="link-separator">/</span>
+          <a href="mailto:hello@karam.dev" class="hero-link">Email</a>
+          <span class="link-separator">/</span>
+          <a href="https://twitter.com/karam" class="hero-link">Twitter</a>
+          <span class="link-separator">/</span>
+          <a href="https://github.com/karam" class="hero-link">GitHub</a>
+        </nav>
+      </div>
+    </div>
+
+    <button class="scroll-indicator" aria-label="Scroll down">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </button>
+  </section>
+
+  {postsToShow.length > 0 && (
+    <section class="featured-posts">
+      <div class="container">
+        <div class="post-list" id="post-list">
+          {sortedPosts.map((post, index) => (
+            <article class="post-item" data-page={Math.floor(index / POSTS_PER_PAGE) + 1} style={index >= POSTS_PER_PAGE ? 'display: none;' : ''}>
+              <a href={`/blog/${getCleanSlug(post.id)}`} class="post-link">
+                <h3 class="post-title">{post.data.title}</h3>
+              </a>
+              <p class="post-description">{post.data.description}</p>
+              <div class="post-meta">
+                <time datetime={post.data.pubDate.toISOString()}>
+                  {new Intl.DateTimeFormat('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  }).format(post.data.pubDate)}
+                </time>
+                <span class="separator">•</span>
+                <span class="post-category">{post.data.category}</span>
+                <span class="separator">•</span>
+                <span>{post.data.readingTime || 5} min read</span>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {totalPages > 1 && (
+          <nav class="pagination" aria-label="Post pagination">
+            <button class="pagination-btn prev" disabled aria-label="Previous page">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 18l-6-6 6-6"/>
+              </svg>
+            </button>
+            <div class="pagination-info">
+              <span class="current-page">1</span>
+              <span class="page-separator">/</span>
+              <span class="total-pages">{totalPages}</span>
+            </div>
+            <button class="pagination-btn next" aria-label="Next page">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
+            </button>
+          </nav>
+        )}
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  /* Hero Section */
+  .hero {
+    height: 100svh;
+    margin-top: -4rem;
+    padding-top: 4rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    text-align: left;
+  }
+
+  .hero-name {
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+
+  .name-prefix {
+    display: block;
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+  }
+
+  .name-main {
+    font-family: var(--font-display);
+    font-size: clamp(4.5rem, 18vw, 12rem);
+    font-weight: 700;
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    margin: 0;
+    margin-left: -0.03em;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.1s forwards, shimmer 8s linear infinite;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.6) 0%,
+      rgba(255, 255, 255, 1) 30%,
+      rgba(200, 240, 255, 1) 50%,
+      rgba(255, 255, 255, 1) 70%,
+      rgba(255, 255, 255, 0.6) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  .hero-content {
+    max-width: 580px;
+    text-align: left;
+  }
+
+  .hero-bio {
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.02em;
+    font-weight: 350;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.2s forwards;
+  }
+
+  .highlight-kraken,
+  .highlight-kraken:hover,
+  .highlight-kraken:visited {
+    text-decoration: none;
+    background: linear-gradient(90deg, #F050F8 0%, #F050F8 20%, #b845cb 80%, #F050F8 90%, #F050F8 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 8s linear infinite;
+  }
+
+  .highlight-kraken::after {
+    display: none;
+  }
+
+  .highlight-claude {
+    background: linear-gradient(90deg, #c15f3c 0%, #c15f3c 20%, #f6630a 80%, #c15f3c 90%, #c15f3c 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 8s linear infinite;
+    text-decoration: line-through;
+    text-decoration-color: #c15f3c;
+  }
+
+  .hero-links {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.3s forwards;
+  }
+
+  .hero-link {
+    font-size: 0.875rem;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    color: var(--color-text);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: color var(--transition-fast), opacity var(--transition-fast);
+    position: relative;
+  }
+
+  .hero-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--color-accent);
+    opacity: 0.3;
+    transition: opacity var(--transition-fast);
+  }
+
+  .hero-link:hover {
+    color: var(--color-accent);
+  }
+
+  .hero-link:hover::after {
+    opacity: 1;
+  }
+
+  .link-separator {
+    color: var(--color-text-muted);
+    opacity: 0.4;
+    font-size: 0.75rem;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Scroll Indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: all var(--transition-medium);
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.6s forwards, bounce 2s ease-in-out 1s infinite;
+  }
+
+  .scroll-indicator svg {
+    display: block;
+  }
+
+  .scroll-indicator:hover {
+    color: var(--color-accent);
+    transform: translateX(-50%) scale(1.2);
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    40% {
+      transform: translateX(-50%) translateY(-10px);
+    }
+    60% {
+      transform: translateX(-50%) translateY(-5px);
+    }
+  }
+
+  /* Featured Posts */
+  .featured-posts {
+    padding: 5rem 0 0;
+  }
+
+  .section-title {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .post-item {
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .post-item:last-child {
+    border-bottom: none;
+  }
+
+  .post-link {
+    text-decoration: none;
+  }
+
+  .post-title {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    line-height: 1.35;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+    transition: color var(--transition-fast);
+  }
+
+  .post-link:hover .post-title {
+    color: var(--color-accent);
+  }
+
+  .post-description {
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+    line-height: 1.7;
+    max-width: 70ch;
+    font-size: 1.0625rem;
+    letter-spacing: -0.025em;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.8125rem;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    letter-spacing: 0;
+  }
+
+  .separator {
+    opacity: 0.5;
+  }
+
+  .post-category {
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 768px) {
+    .hero-inner {
+      padding: 0 1.5rem;
+    }
+
+    .hero-name {
+      margin-bottom: 2rem;
+    }
+
+    .name-prefix {
+      font-size: 0.875rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .name-main {
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-bio {
+      font-size: 1.0625rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-links {
+      gap: 0.5rem;
+    }
+
+    .hero-link {
+      font-size: 0.8125rem;
+    }
+
+    .scroll-indicator {
+      bottom: max(1.5rem, env(safe-area-inset-bottom, 1.5rem));
+    }
+
+    .scroll-indicator svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .post-item {
+      padding: 2rem 0;
+    }
+
+    .post-title {
+      font-size: 1.5rem;
+    }
+
+    .post-description {
+      font-size: 1rem;
+    }
+
+    .featured-posts {
+      padding: 3rem 0 4rem;
+    }
+
+    .featured-posts::before {
+      margin-bottom: 2rem;
+    }
+  }
+
+  /* Pagination */
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .pagination-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .pagination-btn:hover:not(:disabled) {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .pagination-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .pagination-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .current-page {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  .page-separator {
+    opacity: 0.5;
+  }
+
+  @media (max-width: 768px) {
+    .pagination {
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .pagination-btn {
+      width: 36px;
+      height: 36px;
+    }
+  }
+</style>
+
+<script>
+  import { getPageFromURL, updateURLForPage } from '../scripts/pagination';
+
+  // Use window state to prevent issues with View Transitions
+  declare global {
+    interface Window {
+      __homeScrollState?: {
+        isScrolling: boolean;
+        listenersAdded: boolean;
+        touchStartY: number;
+      };
+    }
+  }
+
+  // Initialize or reset state
+  window.__homeScrollState = window.__homeScrollState || { isScrolling: false, listenersAdded: false, touchStartY: 0 };
+  window.__homeScrollState.isScrolling = false;
+
+  const state = window.__homeScrollState;
+
+  function scrollToPosts() {
+    const featuredPosts = document.querySelector('.featured-posts');
+    if (!featuredPosts) return;
+
+    featuredPosts.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function isHomepage() {
+    return window.location.pathname === '/' || window.location.pathname === '/index.html';
+  }
+
+  // Only add global listeners once
+  if (!state.listenersAdded) {
+    state.listenersAdded = true;
+
+    // Home link click handler - reset pagination to page 1
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a');
+      // Check if clicking Home link, logo, or any link to "/"
+      if (anchor && (anchor.getAttribute('href') === '/' || anchor.classList.contains('logo'))) {
+        // Clear the page parameter when navigating to Home
+        const url = new URL(window.location.href);
+        url.searchParams.delete('page');
+        url.hash = ''; // Also clear any hash
+        window.history.replaceState({ page: 1 }, '', url.toString());
+      }
+    });
+
+    window.addEventListener('wheel', (e: WheelEvent) => {
+      if (!isHomepage()) return;
+
+      const atHero = window.scrollY < 10;
+
+      if (state.isScrolling) {
+        e.preventDefault();
+        return;
+      }
+
+      if (e.deltaY > 0 && atHero) {
+        e.preventDefault();
+        state.isScrolling = true;
+        scrollToPosts();
+        setTimeout(() => { state.isScrolling = false; }, 900);
+      }
+    }, { passive: false });
+
+    window.addEventListener('touchstart', (e: TouchEvent) => {
+      state.touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e: TouchEvent) => {
+      if (!isHomepage()) return;
+      if (state.isScrolling) return;
+
+      const touchY = e.touches[0].clientY;
+      const deltaY = state.touchStartY - touchY;
+      const atHero = window.scrollY < 10;
+
+      if (deltaY > 30 && atHero) {
+        e.preventDefault();
+        state.isScrolling = true;
+        scrollToPosts();
+        setTimeout(() => { state.isScrolling = false; }, 800);
+      }
+    }, { passive: false });
+  }
+
+  // Setup function for elements that need re-binding after View Transitions
+  function setupPageElements() {
+    // Scroll indicator click
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    if (scrollIndicator) {
+      scrollIndicator.addEventListener('click', scrollToPosts);
+    }
+
+    // Earth emoji rotation
+    const earthEmojis = ['🌎', '🌍', '🌏'];
+    let earthIndex = 0;
+    const rotatingEarth = document.querySelector('.rotating-earth');
+    if (rotatingEarth) {
+      const intervalId = setInterval(() => {
+        earthIndex = (earthIndex + 1) % earthEmojis.length;
+        if (document.contains(rotatingEarth)) {
+          rotatingEarth.textContent = earthEmojis[earthIndex];
+        } else {
+          clearInterval(intervalId);
+        }
+      }, 500);
+    }
+
+    // Pagination
+    const pagination = document.querySelector('.pagination');
+    if (pagination) {
+      const postItems = document.querySelectorAll('.post-item');
+      const prevBtn = pagination.querySelector('.prev') as HTMLButtonElement;
+      const nextBtn = pagination.querySelector('.next') as HTMLButtonElement;
+      const currentPageEl = pagination.querySelector('.current-page');
+      const totalPagesEl = pagination.querySelector('.total-pages');
+
+      const totalPages = parseInt(totalPagesEl?.textContent || '1');
+      let currentPage = getPageFromURL();
+
+      // Clamp to valid range
+      if (currentPage > totalPages) {
+        currentPage = totalPages;
+      }
+
+      function updatePagination(newPage: number, shouldScroll = false) {
+        const clampedPage = Math.min(Math.max(newPage, 1), totalPages);
+        currentPage = clampedPage;
+
+        // Update URL and history state
+        updateURLForPage(currentPage, totalPages);
+
+        // Update button states
+        if (prevBtn) prevBtn.disabled = currentPage === 1;
+        if (nextBtn) nextBtn.disabled = currentPage === totalPages;
+
+        // Update page number display
+        if (currentPageEl) currentPageEl.textContent = currentPage.toString();
+
+        // Show/hide posts
+        postItems.forEach((item) => {
+          const itemPage = parseInt((item as HTMLElement).dataset.page || '1');
+          (item as HTMLElement).style.display = itemPage === currentPage ? '' : 'none';
+        });
+
+        // Only scroll to posts section when user clicks pagination buttons
+        if (shouldScroll) {
+          document.querySelector('.featured-posts')?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }
+
+      // Initial render - don't scroll
+      updatePagination(currentPage, false);
+
+      // Initialize history state if not present
+      if (!window.history.state) {
+        window.history.replaceState({ page: currentPage }, '', window.location.href);
+      }
+
+      // Event listeners
+      prevBtn?.addEventListener('click', () => {
+        if (currentPage > 1) {
+          updatePagination(currentPage - 1, true);
+        }
+      });
+
+      nextBtn?.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+          updatePagination(currentPage + 1, true);
+        }
+      });
+
+      // Listen for browser back/forward
+      window.addEventListener('popstate', (event) => {
+        const newPage = event.state?.page || getPageFromURL();
+        updatePagination(newPage, false);
+      });
+    }
+  }
+
+  // Run setup on initial load
+  setupPageElements();
+
+  // Re-run setup after View Transitions
+  document.addEventListener('astro:after-swap', setupPageElements);
+</script>
