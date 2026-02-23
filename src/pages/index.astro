@@ -578,43 +578,47 @@ const postsToShow = sortedPosts.slice(0, POSTS_PER_PAGE);
       }
     });
 
-    window.addEventListener('wheel', (e: WheelEvent) => {
-      if (!isHomepage()) return;
+    const isPointerCoarse = window.matchMedia('(pointer: coarse)').matches;
 
-      const atHero = window.scrollY < 10;
+    if (!isPointerCoarse) {
+      window.addEventListener('wheel', (e: WheelEvent) => {
+        if (!isHomepage()) return;
 
-      if (state.isScrolling) {
-        e.preventDefault();
-        return;
-      }
+        const atHero = window.scrollY < 10;
 
-      if (e.deltaY > 0 && atHero) {
-        e.preventDefault();
-        state.isScrolling = true;
-        scrollToPosts();
-        setTimeout(() => { state.isScrolling = false; }, 900);
-      }
-    }, { passive: false });
+        if (state.isScrolling) {
+          e.preventDefault();
+          return;
+        }
 
-    window.addEventListener('touchstart', (e: TouchEvent) => {
-      state.touchStartY = e.touches[0].clientY;
-    }, { passive: true });
+        if (e.deltaY > 0 && atHero) {
+          e.preventDefault();
+          state.isScrolling = true;
+          scrollToPosts();
+          setTimeout(() => { state.isScrolling = false; }, 900);
+        }
+      }, { passive: false });
 
-    window.addEventListener('touchmove', (e: TouchEvent) => {
-      if (!isHomepage()) return;
-      if (state.isScrolling) return;
+      window.addEventListener('touchstart', (e: TouchEvent) => {
+        state.touchStartY = e.touches[0].clientY;
+      }, { passive: true });
 
-      const touchY = e.touches[0].clientY;
-      const deltaY = state.touchStartY - touchY;
-      const atHero = window.scrollY < 10;
+      window.addEventListener('touchmove', (e: TouchEvent) => {
+        if (!isHomepage()) return;
+        if (state.isScrolling) return;
 
-      if (deltaY > 30 && atHero) {
-        e.preventDefault();
-        state.isScrolling = true;
-        scrollToPosts();
-        setTimeout(() => { state.isScrolling = false; }, 800);
-      }
-    }, { passive: false });
+        const touchY = e.touches[0].clientY;
+        const deltaY = state.touchStartY - touchY;
+        const atHero = window.scrollY < 10;
+
+        if (deltaY > 30 && atHero) {
+          e.preventDefault();
+          state.isScrolling = true;
+          scrollToPosts();
+          setTimeout(() => { state.isScrolling = false; }, 800);
+        }
+      }, { passive: false });
+    }
   }
 
   // Setup function for elements that need re-binding after View Transitions
